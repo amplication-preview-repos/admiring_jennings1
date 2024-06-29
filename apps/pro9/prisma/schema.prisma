@@ -1,0 +1,184 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Identite {
+  civilite               EnumIdentiteCivilite?
+  codeLieuNaissance      String
+  communeDeNaissance     String
+  createdAt              DateTime                @default(now())
+  dateNaissance          DateTime
+  departementDeNaissance String?
+  id                     String                  @id @default(cuid())
+  nationalite            EnumIdentiteNationalite
+  nomNaissance           String
+  nomUsuel               String
+  numeroInsee            String?
+  paysDeNaissance        Json?
+  premierPrenom          String
+  prenoms                String
+  prenomUsuel            String
+  salarie                Salarie?
+  sexe                   EnumIdentiteSexe?
+  updatedAt              DateTime                @updatedAt
+}
+
+model Telecom {
+  createdAt   DateTime             @default(now())
+  id          String               @id @default(cuid())
+  Salarie     Salarie?
+  typeMoyen   EnumTelecomTypeMoyen
+  updatedAt   DateTime             @updatedAt
+  valeurMoyen Json
+}
+
+model Affectation {
+  activite  EnumAffectationActivite
+  createdAt DateTime                @default(now())
+  domaine   Structure               @relation(name: "affectationDomaine", fields: [domaine], references: [id])
+  domaine   String                  @unique
+  id        String                  @id @default(cuid())
+  salarie   Salarie?
+  structure Structure               @relation(name: "AffectationsOnStructure", fields: [structure], references: [id])
+  structure String
+  updatedAt DateTime                @updatedAt
+}
+
+model Utilisateur {
+  civilite          String?
+  createdAt         DateTime             @default(now())
+  dateActivation    DateTime?
+  dateDesactivation DateTime?
+  email             String?
+  habilitation      Habilitation?        @relation(fields: [habilitationId], references: [id])
+  habilitationId    String?              @unique
+  id                String               @id @default(cuid())
+  mssEmail          String?
+  nom               String?
+  password          String?
+  prenom            String?
+  role              EnumUtilisateurRole?
+  updatedAt         DateTime             @updatedAt
+  username          String?
+}
+
+model Habilitation {
+  createdAt             DateTime     @default(now())
+  gestionAdministration Boolean?
+  gestionUtilisateur    Boolean?
+  id                    String       @id @default(cuid())
+  perimetre             Perimetre    @relation(fields: [perimetreId], references: [id])
+  perimetreId           String       @unique
+  updatedAt             DateTime     @updatedAt
+  utilisateur           Utilisateur?
+}
+
+model Perimetre {
+  createdAt     DateTime       @default(now())
+  habilitations Habilitation[]
+  id            String         @id @default(cuid())
+  structure     Structure      @relation(fields: [structureId], references: [id])
+  structureId   String         @unique
+  updatedAt     DateTime       @updatedAt
+}
+
+model Adresse {
+  createdAt            DateTime           @default(now())
+  debutValidite        DateTime
+  demanagementSalaries Salarie?           @relation(name: "demanagementSalaries")
+  DomiciliationSalarie Salarie?           @relation(name: "DomiciliationSalarie")
+  finValidite          DateTime?
+  id                   String             @id @default(cuid())
+  informationPostale   InformationPostale @relation(fields: [informationPostaleId], references: [id])
+  informationPostaleId String             @unique
+  updatedAt            DateTime           @updatedAt
+}
+
+model Structure {
+  affectationDomaine Affectation?            @relation(name: "affectationDomaine")
+  affectations       Affectation[]           @relation(name: "AffectationsOnStructure")
+  createdAt          DateTime                @default(now())
+  id                 String                  @id @default(cuid())
+  libell             String
+  perimetre          Perimetre?
+  typeField          EnumStructureTypeField?
+  updatedAt          DateTime                @updatedAt
+}
+
+model Salarie {
+  affectations  Affectation @relation(fields: [affectation], references: [id])
+  affectation   String      @unique
+  createdAt     DateTime    @default(now())
+  demenegament  Adresse     @relation(name: "demanagementSalaries", fields: [demenagement], references: [id])
+  demenagement  String      @unique
+  domiciliation Adresse     @relation(name: "DomiciliationSalarie", fields: [domiciliation], references: [id])
+  domiciliation String      @unique
+  id            String      @id @default(cuid())
+  identite      Identite    @relation(fields: [identiteId], references: [id])
+  identiteId    String      @unique
+  statutAdmr    Boolean
+  statutVip     Boolean
+  telecom       Telecom?    @relation(fields: [telecomId], references: [id])
+  telecomId     String?     @unique
+  updatedAt     DateTime    @updatedAt
+}
+
+model InformationPostale {
+  adresse                    Adresse?
+  ancienCogCommune           String?
+  cogCommune                 String?
+  cogPays                    String?
+  complementAdresseExterieur String?
+  complementAdresseInterieur String?
+  complementVoie             String?
+  cpCommune                  String
+  createdAt                  DateTime @default(now())
+  id                         String   @id @default(cuid())
+  libelleCommune             String?
+  libellePays                String?
+  libelleVoie                String
+  matriculeVoie              String?
+  mentionPostal              String?
+  numeroVoie                 Int?
+  typeAbregeVoie             String?
+  updatedAt                  DateTime @updatedAt
+}
+
+enum EnumIdentiteCivilite {
+  Homme
+  Femme
+}
+
+enum EnumIdentiteNationalite {
+  Option1
+}
+
+enum EnumIdentiteSexe {
+  Feminin
+  Masculin
+}
+
+enum EnumTelecomTypeMoyen {
+  Option1
+}
+
+enum EnumAffectationActivite {
+  Domicile
+  Soin
+  Repas
+}
+
+enum EnumUtilisateurRole {
+  Option1
+}
+
+enum EnumStructureTypeField {
+  Agence
+  Association
+  Federation
+}
