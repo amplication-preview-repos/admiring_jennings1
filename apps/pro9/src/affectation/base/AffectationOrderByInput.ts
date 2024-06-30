@@ -50,7 +50,7 @@ class AffectationOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  domaine?: SortOrder;
+  domaineId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -83,7 +83,7 @@ class AffectationOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  structure?: SortOrder;
+  structureId?: SortOrder;
 
   @ApiProperty({
     required: false,

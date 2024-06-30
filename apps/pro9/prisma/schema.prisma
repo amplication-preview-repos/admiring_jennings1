@@ -38,15 +38,15 @@ model Telecom {
 }
 
 model Affectation {
-  activite  EnumAffectationActivite
-  createdAt DateTime                @default(now())
-  domaine   Structure               @relation(name: "affectationDomaine", fields: [domaine], references: [id])
-  domaine   String                  @unique
-  id        String                  @id @default(cuid())
-  salarie   Salarie?
-  structure Structure               @relation(name: "AffectationsOnStructure", fields: [structure], references: [id])
-  structure String
-  updatedAt DateTime                @updatedAt
+  activite    EnumAffectationActivite
+  createdAt   DateTime                @default(now())
+  domaine     Structure               @relation(name: "affectationDomaine", fields: [domaineId], references: [id])
+  domaineId   String                  @unique
+  id          String                  @id @default(cuid())
+  salarie     Salarie?
+  structure   Structure               @relation(name: "AffectationsOnStructure", fields: [structureId], references: [id])
+  structureId String
+  updatedAt   DateTime                @updatedAt
 }
 
 model Utilisateur {
@@ -111,21 +111,21 @@ model Structure {
 }
 
 model Salarie {
-  affectations  Affectation @relation(fields: [affectation], references: [id])
-  affectation   String      @unique
-  createdAt     DateTime    @default(now())
-  demenegament  Adresse     @relation(name: "demanagementSalaries", fields: [demenagement], references: [id])
-  demenagement  String      @unique
-  domiciliation Adresse     @relation(name: "DomiciliationSalarie", fields: [domiciliation], references: [id])
-  domiciliation String      @unique
-  id            String      @id @default(cuid())
-  identite      Identite    @relation(fields: [identiteId], references: [id])
-  identiteId    String      @unique
-  statutAdmr    Boolean
-  statutVip     Boolean
-  telecom       Telecom?    @relation(fields: [telecomId], references: [id])
-  telecomId     String?     @unique
-  updatedAt     DateTime    @updatedAt
+  affectations    Affectation @relation(fields: [affectation], references: [id])
+  affectation     String      @unique
+  createdAt       DateTime    @default(now())
+  demenegament    Adresse     @relation(name: "demanagementSalaries", fields: [demenagementId], references: [id])
+  demenagementId  String      @unique
+  domiciliation   Adresse     @relation(name: "DomiciliationSalarie", fields: [domiciliationId], references: [id])
+  domiciliationId String      @unique
+  id              String      @id @default(cuid())
+  identite        Identite    @relation(fields: [identiteId], references: [id])
+  identiteId      String      @unique
+  statutAdmr      Boolean
+  statutVip       Boolean
+  telecom         Telecom?    @relation(fields: [telecomId], references: [id])
+  telecomId       String?     @unique
+  updatedAt       DateTime    @updatedAt
 }
 
 model InformationPostale {

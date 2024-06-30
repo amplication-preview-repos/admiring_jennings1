@@ -50,7 +50,7 @@ class SalarieOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  demenagement?: SortOrder;
+  demenagementId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -61,7 +61,7 @@ class SalarieOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  domiciliation?: SortOrder;
+  domiciliationId?: SortOrder;
 
   @ApiProperty({
     required: false,

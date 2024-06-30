@@ -41,7 +41,7 @@ export const StructureShow = (props: ShowProps): React.ReactElement => {
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="Affectation"
-          target="structure"
+          target="structureId"
           label="Affectations"
         >
           <Datagrid rowClick="show">
