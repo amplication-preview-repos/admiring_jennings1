@@ -5,7 +5,7 @@ export type Telecom = {
   createdAt: Date;
   id: string;
   Salarie?: Salarie | null;
-  typeMoyen?: "Option1";
+  typeMoyen: string;
   updatedAt: Date;
   valeurMoyen: JsonValue;
 };

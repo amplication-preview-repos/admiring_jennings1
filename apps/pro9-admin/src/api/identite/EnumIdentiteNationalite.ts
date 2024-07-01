@@ -1,3 +1,4 @@
 export enum EnumIdentiteNationalite {
-  Option_1 = "Option1",
+  France = "France",
+  Autre = "Autre",
 }

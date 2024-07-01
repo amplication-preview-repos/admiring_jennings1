@@ -99,7 +99,7 @@ class IdentiteWhereInput {
   @Field(() => EnumIdentiteNationalite, {
     nullable: true,
   })
-  nationalite?: "Option1";
+  nationalite?: "France" | "Autre";
 
   @ApiProperty({
     required: false,

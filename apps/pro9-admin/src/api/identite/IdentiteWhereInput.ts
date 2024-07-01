@@ -11,7 +11,7 @@ export type IdentiteWhereInput = {
   dateNaissance?: DateTimeFilter;
   departementDeNaissance?: StringNullableFilter;
   id?: StringFilter;
-  nationalite?: "Option1";
+  nationalite?: "France" | "Autre";
   nomNaissance?: StringFilter;
   nomUsuel?: StringFilter;
   numeroInsee?: StringNullableFilter;

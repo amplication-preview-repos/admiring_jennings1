@@ -11,10 +11,9 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsEnum } from "class-validator";
+import { IsDate, IsString, ValidateNested, MaxLength } from "class-validator";
 import { Type } from "class-transformer";
 import { Salarie } from "../../salarie/base/Salarie";
-import { EnumTelecomTypeMoyen } from "./EnumTelecomTypeMoyen";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
@@ -47,13 +46,12 @@ class Telecom {
 
   @ApiProperty({
     required: true,
-    enum: EnumTelecomTypeMoyen,
+    type: String,
   })
-  @IsEnum(EnumTelecomTypeMoyen)
-  @Field(() => EnumTelecomTypeMoyen, {
-    nullable: true,
-  })
-  typeMoyen?: "Option1";
+  @IsString()
+  @MaxLength(256)
+  @Field(() => String)
+  typeMoyen!: string;
 
   @ApiProperty({
     required: true,

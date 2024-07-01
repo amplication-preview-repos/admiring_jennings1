@@ -12,10 +12,14 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
+import {
+  ValidateNested,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Salarie } from "../../salarie/base/Salarie";
-import { EnumTelecomTypeMoyen } from "./EnumTelecomTypeMoyen";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -36,14 +40,15 @@ class TelecomUpdateInput {
 
   @ApiProperty({
     required: false,
-    enum: EnumTelecomTypeMoyen,
+    type: String,
   })
-  @IsEnum(EnumTelecomTypeMoyen)
+  @IsString()
+  @MaxLength(256)
   @IsOptional()
-  @Field(() => EnumTelecomTypeMoyen, {
+  @Field(() => String, {
     nullable: true,
   })
-  typeMoyen?: "Option1";
+  typeMoyen?: string;
 
   @ApiProperty({
     required: false,

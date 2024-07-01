@@ -6,6 +6,6 @@ import { JsonFilter } from "../../util/JsonFilter";
 export type TelecomWhereInput = {
   id?: StringFilter;
   Salarie?: SalarieWhereUniqueInput;
-  typeMoyen?: "Option1";
+  typeMoyen?: StringFilter;
   valeurMoyen?: JsonFilter;
 };

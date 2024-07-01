@@ -4,6 +4,6 @@ import { InputJsonValue } from "../../types";
 
 export type TelecomCreateInput = {
   Salarie: SalarieWhereUniqueInput | null;
-  typeMoyen: "Option1";
+  typeMoyen: string;
   valeurMoyen: InputJsonValue;
 };

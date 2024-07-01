@@ -13,10 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { IsOptional, ValidateNested } from "class-validator";
 import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
 import { Salarie } from "../../salarie/base/Salarie";
-import { EnumTelecomTypeMoyen } from "./EnumTelecomTypeMoyen";
 import { JsonFilter } from "../../util/JsonFilter";
 
 @InputType()
@@ -46,14 +45,14 @@ class TelecomWhereInput {
 
   @ApiProperty({
     required: false,
-    enum: EnumTelecomTypeMoyen,
+    type: StringFilter,
   })
-  @IsEnum(EnumTelecomTypeMoyen)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => EnumTelecomTypeMoyen, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  typeMoyen?: "Option1";
+  typeMoyen?: StringFilter;
 
   @ApiProperty({
     required: false,

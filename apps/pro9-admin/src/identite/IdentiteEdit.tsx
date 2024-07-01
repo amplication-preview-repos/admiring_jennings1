@@ -37,7 +37,10 @@ export const IdentiteEdit = (props: EditProps): React.ReactElement => {
         <SelectInput
           source="nationalite"
           label="Nationalité"
-          choices={[{ label: "Option 1", value: "Option1" }]}
+          choices={[
+            { label: "France", value: "France" },
+            { label: "Autre", value: "Autre" },
+          ]}
           optionText="label"
           optionValue="value"
         />

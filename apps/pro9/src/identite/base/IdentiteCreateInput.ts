@@ -85,7 +85,7 @@ class IdentiteCreateInput {
   })
   @IsEnum(EnumIdentiteNationalite)
   @Field(() => EnumIdentiteNationalite)
-  nationalite!: "Option1";
+  nationalite!: "France" | "Autre";
 
   @ApiProperty({
     required: true,

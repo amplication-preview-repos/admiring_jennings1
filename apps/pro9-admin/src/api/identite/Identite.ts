@@ -9,7 +9,7 @@ export type Identite = {
   dateNaissance: Date;
   departementDeNaissance: string | null;
   id: string;
-  nationalite?: "Option1";
+  nationalite?: "France" | "Autre";
   nomNaissance: string;
   nomUsuel: string;
   numeroInsee: string | null;

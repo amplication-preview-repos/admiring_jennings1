@@ -5,6 +5,7 @@ import {
   EditProps,
   ReferenceInput,
   SelectInput,
+  TextInput,
 } from "react-admin";
 import { SalarieTitle } from "../salarie/SalarieTitle";
 
@@ -15,13 +16,7 @@ export const TelecomEdit = (props: EditProps): React.ReactElement => {
         <ReferenceInput source="Salarie.id" reference="Salarie" label="Salarié">
           <SelectInput optionText={SalarieTitle} />
         </ReferenceInput>
-        <SelectInput
-          source="typeMoyen"
-          label="Type de moyen"
-          choices={[{ label: "Option 1", value: "Option1" }]}
-          optionText="label"
-          optionValue="value"
-        />
+        <TextInput label="Type de moyen" source="typeMoyen" />
         <div />
       </SimpleForm>
     </Edit>

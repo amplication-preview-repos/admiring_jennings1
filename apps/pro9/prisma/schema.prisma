@@ -29,11 +29,11 @@ model Identite {
 }
 
 model Telecom {
-  createdAt   DateTime             @default(now())
-  id          String               @id @default(cuid())
+  createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
   Salarie     Salarie?
-  typeMoyen   EnumTelecomTypeMoyen
-  updatedAt   DateTime             @updatedAt
+  typeMoyen   String
+  updatedAt   DateTime @updatedAt
   valeurMoyen Json
 }
 
@@ -155,16 +155,13 @@ enum EnumIdentiteCivilite {
 }
 
 enum EnumIdentiteNationalite {
-  Option1
+  France
+  Autre
 }
 
 enum EnumIdentiteSexe {
   Feminin
   Masculin
-}
-
-enum EnumTelecomTypeMoyen {
-  Option1
 }
 
 enum EnumAffectationActivite {

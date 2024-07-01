@@ -7,7 +7,7 @@ export type IdentiteUpdateInput = {
   communeDeNaissance?: string;
   dateNaissance?: Date;
   departementDeNaissance?: string | null;
-  nationalite?: "Option1";
+  nationalite?: "France" | "Autre";
   nomNaissance?: string;
   nomUsuel?: string;
   numeroInsee?: string | null;
