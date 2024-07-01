@@ -16,7 +16,11 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { StructureService } from "../structure.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { StructureCreateInput } from "./StructureCreateInput";
 import { Structure } from "./Structure";
 import { StructureFindManyArgs } from "./StructureFindManyArgs";
@@ -26,10 +30,24 @@ import { AffectationFindManyArgs } from "../../affectation/base/AffectationFindM
 import { Affectation } from "../../affectation/base/Affectation";
 import { AffectationWhereUniqueInput } from "../../affectation/base/AffectationWhereUniqueInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class StructureControllerBase {
-  constructor(protected readonly service: StructureService) {}
+  constructor(
+    protected readonly service: StructureService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Structure })
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createStructure(
     @common.Body() data: StructureCreateInput
   ): Promise<Structure> {
@@ -70,9 +88,18 @@ export class StructureControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Structure] })
   @ApiNestedQuery(StructureFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async structures(@common.Req() request: Request): Promise<Structure[]> {
     const args = plainToClass(StructureFindManyArgs, request.query);
     return this.service.structures({
@@ -100,9 +127,18 @@ export class StructureControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Structure })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async structure(
     @common.Param() params: StructureWhereUniqueInput
   ): Promise<Structure | null> {
@@ -137,9 +173,18 @@ export class StructureControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Structure })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateStructure(
     @common.Param() params: StructureWhereUniqueInput,
     @common.Body() data: StructureUpdateInput
@@ -194,6 +239,14 @@ export class StructureControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Structure })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteStructure(
     @common.Param() params: StructureWhereUniqueInput
   ): Promise<Structure | null> {
@@ -231,8 +284,14 @@ export class StructureControllerBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/affectations")
   @ApiNestedQuery(AffectationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "any",
+  })
   async findAffectations(
     @common.Req() request: Request,
     @common.Param() params: StructureWhereUniqueInput
@@ -276,6 +335,11 @@ export class StructureControllerBase {
   }
 
   @common.Post("/:id/affectations")
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "update",
+    possession: "any",
+  })
   async connectAffectations(
     @common.Param() params: StructureWhereUniqueInput,
     @common.Body() body: AffectationWhereUniqueInput[]
@@ -293,6 +357,11 @@ export class StructureControllerBase {
   }
 
   @common.Patch("/:id/affectations")
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "update",
+    possession: "any",
+  })
   async updateAffectations(
     @common.Param() params: StructureWhereUniqueInput,
     @common.Body() body: AffectationWhereUniqueInput[]
@@ -310,6 +379,11 @@ export class StructureControllerBase {
   }
 
   @common.Delete("/:id/affectations")
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "update",
+    possession: "any",
+  })
   async disconnectAffectations(
     @common.Param() params: StructureWhereUniqueInput,
     @common.Body() body: AffectationWhereUniqueInput[]

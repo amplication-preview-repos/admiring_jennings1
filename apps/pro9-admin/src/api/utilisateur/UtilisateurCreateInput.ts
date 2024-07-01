@@ -1,4 +1,5 @@
 import { HabilitationWhereUniqueInput } from "../habilitation/HabilitationWhereUniqueInput";
+import { InputJsonValue } from "../../types";
 
 export type UtilisateurCreateInput = {
   civilite?: string | null;
@@ -10,6 +11,6 @@ export type UtilisateurCreateInput = {
   nom?: string | null;
   password?: string | null;
   prenom?: string | null;
-  role?: "Option1" | null;
+  roles: InputJsonValue;
   username?: string | null;
 };

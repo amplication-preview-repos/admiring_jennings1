@@ -13,11 +13,10 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { IsOptional, ValidateNested } from "class-validator";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { HabilitationWhereUniqueInput } from "../../habilitation/base/HabilitationWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
-import { EnumUtilisateurRole } from "./EnumUtilisateurRole";
 
 @InputType()
 class UtilisateurWhereInput {
@@ -120,17 +119,6 @@ class UtilisateurWhereInput {
     nullable: true,
   })
   prenom?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumUtilisateurRole,
-  })
-  @IsEnum(EnumUtilisateurRole)
-  @IsOptional()
-  @Field(() => EnumUtilisateurRole, {
-    nullable: true,
-  })
-  role?: "Option1";
 
   @ApiProperty({
     required: false,

@@ -149,7 +149,7 @@ class UtilisateurOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  role?: SortOrder;
+  roles?: SortOrder;
 
   @ApiProperty({
     required: false,

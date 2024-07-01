@@ -9,9 +9,11 @@ import {
   ReferenceInput,
   SelectInput,
   PasswordInput,
+  SelectArrayInput,
 } from "react-admin";
 
 import { HabilitationTitle } from "../habilitation/HabilitationTitle";
+import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UtilisateurCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -32,12 +34,10 @@ export const UtilisateurCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="nom" source="nom" />
         <PasswordInput label="password" source="password" />
         <TextInput label="prenom" source="prenom" />
-        <SelectInput
-          source="role"
-          label="role"
-          choices={[{ label: "Option 1", value: "Option1" }]}
+        <SelectArrayInput
+          source="roles"
+          choices={ROLES_OPTIONS}
           optionText="label"
-          allowEmpty
           optionValue="value"
         />
         <TextInput label="username" source="username" />

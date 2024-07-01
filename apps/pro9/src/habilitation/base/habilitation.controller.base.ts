@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { HabilitationService } from "../habilitation.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { HabilitationCreateInput } from "./HabilitationCreateInput";
 import { Habilitation } from "./Habilitation";
 import { HabilitationFindManyArgs } from "./HabilitationFindManyArgs";
 import { HabilitationWhereUniqueInput } from "./HabilitationWhereUniqueInput";
 import { HabilitationUpdateInput } from "./HabilitationUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class HabilitationControllerBase {
-  constructor(protected readonly service: HabilitationService) {}
+  constructor(
+    protected readonly service: HabilitationService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Habilitation })
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createHabilitation(
     @common.Body() data: HabilitationCreateInput
   ): Promise<Habilitation> {
@@ -65,9 +83,18 @@ export class HabilitationControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Habilitation] })
   @ApiNestedQuery(HabilitationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async habilitations(@common.Req() request: Request): Promise<Habilitation[]> {
     const args = plainToClass(HabilitationFindManyArgs, request.query);
     return this.service.habilitations({
@@ -95,9 +122,18 @@ export class HabilitationControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Habilitation })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async habilitation(
     @common.Param() params: HabilitationWhereUniqueInput
   ): Promise<Habilitation | null> {
@@ -132,9 +168,18 @@ export class HabilitationControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Habilitation })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateHabilitation(
     @common.Param() params: HabilitationWhereUniqueInput,
     @common.Body() data: HabilitationUpdateInput
@@ -187,6 +232,14 @@ export class HabilitationControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Habilitation })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteHabilitation(
     @common.Param() params: HabilitationWhereUniqueInput
   ): Promise<Habilitation | null> {

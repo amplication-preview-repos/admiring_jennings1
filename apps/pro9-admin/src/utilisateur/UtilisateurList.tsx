@@ -36,7 +36,7 @@ export const UtilisateurList = (props: ListProps): React.ReactElement => {
         <TextField label="mssEmail" source="mssEmail" />
         <TextField label="nom" source="nom" />
         <TextField label="prenom" source="prenom" />
-        <TextField label="role" source="role" />
+        <TextField label="roles" source="roles" />
         <DateField source="updatedAt" label="Updated At" />
         <TextField label="username" source="username" />
       </Datagrid>

@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Habilitation } from "./Habilitation";
 import { HabilitationCountArgs } from "./HabilitationCountArgs";
 import { HabilitationFindManyArgs } from "./HabilitationFindManyArgs";
@@ -23,10 +29,20 @@ import { DeleteHabilitationArgs } from "./DeleteHabilitationArgs";
 import { Perimetre } from "../../perimetre/base/Perimetre";
 import { Utilisateur } from "../../utilisateur/base/Utilisateur";
 import { HabilitationService } from "../habilitation.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Habilitation)
 export class HabilitationResolverBase {
-  constructor(protected readonly service: HabilitationService) {}
+  constructor(
+    protected readonly service: HabilitationService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "any",
+  })
   async _habilitationsMeta(
     @graphql.Args() args: HabilitationCountArgs
   ): Promise<MetaQueryPayload> {
@@ -36,14 +52,26 @@ export class HabilitationResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Habilitation])
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "any",
+  })
   async habilitations(
     @graphql.Args() args: HabilitationFindManyArgs
   ): Promise<Habilitation[]> {
     return this.service.habilitations(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Habilitation, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "own",
+  })
   async habilitation(
     @graphql.Args() args: HabilitationFindUniqueArgs
   ): Promise<Habilitation | null> {
@@ -54,7 +82,13 @@ export class HabilitationResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Habilitation)
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "create",
+    possession: "any",
+  })
   async createHabilitation(
     @graphql.Args() args: CreateHabilitationArgs
   ): Promise<Habilitation> {
@@ -74,7 +108,13 @@ export class HabilitationResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Habilitation)
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "update",
+    possession: "any",
+  })
   async updateHabilitation(
     @graphql.Args() args: UpdateHabilitationArgs
   ): Promise<Habilitation | null> {
@@ -104,6 +144,11 @@ export class HabilitationResolverBase {
   }
 
   @graphql.Mutation(() => Habilitation)
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "delete",
+    possession: "any",
+  })
   async deleteHabilitation(
     @graphql.Args() args: DeleteHabilitationArgs
   ): Promise<Habilitation | null> {
@@ -119,9 +164,15 @@ export class HabilitationResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Perimetre, {
     nullable: true,
     name: "perimetre",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "read",
+    possession: "any",
   })
   async getPerimetre(
     @graphql.Parent() parent: Habilitation
@@ -134,9 +185,15 @@ export class HabilitationResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Utilisateur, {
     nullable: true,
     name: "utilisateur",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "read",
+    possession: "any",
   })
   async getUtilisateur(
     @graphql.Parent() parent: Habilitation

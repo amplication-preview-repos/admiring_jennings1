@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Identite } from "./Identite";
 import { IdentiteCountArgs } from "./IdentiteCountArgs";
 import { IdentiteFindManyArgs } from "./IdentiteFindManyArgs";
@@ -22,10 +28,20 @@ import { UpdateIdentiteArgs } from "./UpdateIdentiteArgs";
 import { DeleteIdentiteArgs } from "./DeleteIdentiteArgs";
 import { Salarie } from "../../salarie/base/Salarie";
 import { IdentiteService } from "../identite.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Identite)
 export class IdentiteResolverBase {
-  constructor(protected readonly service: IdentiteService) {}
+  constructor(
+    protected readonly service: IdentiteService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "read",
+    possession: "any",
+  })
   async _identitesMeta(
     @graphql.Args() args: IdentiteCountArgs
   ): Promise<MetaQueryPayload> {
@@ -35,14 +51,26 @@ export class IdentiteResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Identite])
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "read",
+    possession: "any",
+  })
   async identites(
     @graphql.Args() args: IdentiteFindManyArgs
   ): Promise<Identite[]> {
     return this.service.identites(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Identite, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "read",
+    possession: "own",
+  })
   async identite(
     @graphql.Args() args: IdentiteFindUniqueArgs
   ): Promise<Identite | null> {
@@ -53,7 +81,13 @@ export class IdentiteResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Identite)
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "create",
+    possession: "any",
+  })
   async createIdentite(
     @graphql.Args() args: CreateIdentiteArgs
   ): Promise<Identite> {
@@ -69,7 +103,13 @@ export class IdentiteResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Identite)
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "update",
+    possession: "any",
+  })
   async updateIdentite(
     @graphql.Args() args: UpdateIdentiteArgs
   ): Promise<Identite | null> {
@@ -95,6 +135,11 @@ export class IdentiteResolverBase {
   }
 
   @graphql.Mutation(() => Identite)
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "delete",
+    possession: "any",
+  })
   async deleteIdentite(
     @graphql.Args() args: DeleteIdentiteArgs
   ): Promise<Identite | null> {
@@ -110,9 +155,15 @@ export class IdentiteResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Salarie, {
     nullable: true,
     name: "salarie",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "any",
   })
   async getSalarie(
     @graphql.Parent() parent: Identite

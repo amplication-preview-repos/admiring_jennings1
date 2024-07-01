@@ -16,7 +16,11 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { TelecomService } from "../telecom.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { TelecomCreateInput } from "./TelecomCreateInput";
 import { Salarie } from "../../salarie/base/Salarie";
 import { Telecom } from "./Telecom";
@@ -24,10 +28,24 @@ import { TelecomFindManyArgs } from "./TelecomFindManyArgs";
 import { TelecomWhereUniqueInput } from "./TelecomWhereUniqueInput";
 import { TelecomUpdateInput } from "./TelecomUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class TelecomControllerBase {
-  constructor(protected readonly service: TelecomService) {}
+  constructor(
+    protected readonly service: TelecomService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Telecom })
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createTelecom(
     @common.Body() data: TelecomCreateInput
   ): Promise<Telecom> {
@@ -56,9 +74,18 @@ export class TelecomControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Telecom] })
   @ApiNestedQuery(TelecomFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async telecoms(@common.Req() request: Request): Promise<Telecom[]> {
     const args = plainToClass(TelecomFindManyArgs, request.query);
     return this.service.telecoms({
@@ -80,9 +107,18 @@ export class TelecomControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Telecom })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async telecom(
     @common.Param() params: TelecomWhereUniqueInput
   ): Promise<Telecom | null> {
@@ -111,9 +147,18 @@ export class TelecomControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Telecom })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateTelecom(
     @common.Param() params: TelecomWhereUniqueInput,
     @common.Body() data: TelecomUpdateInput
@@ -156,6 +201,14 @@ export class TelecomControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Telecom })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteTelecom(
     @common.Param() params: TelecomWhereUniqueInput
   ): Promise<Telecom | null> {

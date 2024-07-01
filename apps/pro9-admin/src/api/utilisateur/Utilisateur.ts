@@ -1,4 +1,5 @@
 import { Habilitation } from "../habilitation/Habilitation";
+import { JsonValue } from "type-fest";
 
 export type Utilisateur = {
   civilite: string | null;
@@ -11,7 +12,7 @@ export type Utilisateur = {
   mssEmail: string | null;
   nom: string | null;
   prenom: string | null;
-  role?: "Option1" | null;
+  roles: JsonValue;
   updatedAt: Date;
   username: string | null;
 };

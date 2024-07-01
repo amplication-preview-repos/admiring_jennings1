@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { AdresseService } from "../adresse.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AdresseCreateInput } from "./AdresseCreateInput";
 import { Adresse } from "./Adresse";
 import { AdresseFindManyArgs } from "./AdresseFindManyArgs";
 import { AdresseWhereUniqueInput } from "./AdresseWhereUniqueInput";
 import { AdresseUpdateInput } from "./AdresseUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AdresseControllerBase {
-  constructor(protected readonly service: AdresseService) {}
+  constructor(
+    protected readonly service: AdresseService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Adresse })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createAdresse(
     @common.Body() data: AdresseCreateInput
   ): Promise<Adresse> {
@@ -80,9 +98,18 @@ export class AdresseControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Adresse] })
   @ApiNestedQuery(AdresseFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async adresses(@common.Req() request: Request): Promise<Adresse[]> {
     const args = plainToClass(AdresseFindManyArgs, request.query);
     return this.service.adresses({
@@ -117,9 +144,18 @@ export class AdresseControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Adresse })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async adresse(
     @common.Param() params: AdresseWhereUniqueInput
   ): Promise<Adresse | null> {
@@ -161,9 +197,18 @@ export class AdresseControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Adresse })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateAdresse(
     @common.Param() params: AdresseWhereUniqueInput,
     @common.Body() data: AdresseUpdateInput
@@ -231,6 +276,14 @@ export class AdresseControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Adresse })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteAdresse(
     @common.Param() params: AdresseWhereUniqueInput
   ): Promise<Adresse | null> {

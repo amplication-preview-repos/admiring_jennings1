@@ -17,11 +17,12 @@ import {
   IsOptional,
   IsDate,
   ValidateNested,
-  IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Habilitation } from "../../habilitation/base/Habilitation";
-import { EnumUtilisateurRole } from "./EnumUtilisateurRole";
+import { IsJSONValue } from "../../validators";
+import { GraphQLJSON } from "graphql-type-json";
+import { JsonValue } from "type-fest";
 
 @ObjectType()
 class Utilisateur {
@@ -131,15 +132,11 @@ class Utilisateur {
   prenom!: string | null;
 
   @ApiProperty({
-    required: false,
-    enum: EnumUtilisateurRole,
+    required: true,
   })
-  @IsEnum(EnumUtilisateurRole)
-  @IsOptional()
-  @Field(() => EnumUtilisateurRole, {
-    nullable: true,
-  })
-  role?: "Option1" | null;
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  roles!: JsonValue;
 
   @ApiProperty({
     required: true,

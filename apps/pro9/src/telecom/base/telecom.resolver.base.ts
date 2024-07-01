@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Telecom } from "./Telecom";
 import { TelecomCountArgs } from "./TelecomCountArgs";
 import { TelecomFindManyArgs } from "./TelecomFindManyArgs";
@@ -22,10 +28,20 @@ import { Salarie } from "../../salarie/base/Salarie";
 import { UpdateTelecomArgs } from "./UpdateTelecomArgs";
 import { DeleteTelecomArgs } from "./DeleteTelecomArgs";
 import { TelecomService } from "../telecom.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Telecom)
 export class TelecomResolverBase {
-  constructor(protected readonly service: TelecomService) {}
+  constructor(
+    protected readonly service: TelecomService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "read",
+    possession: "any",
+  })
   async _telecomsMeta(
     @graphql.Args() args: TelecomCountArgs
   ): Promise<MetaQueryPayload> {
@@ -35,14 +51,26 @@ export class TelecomResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Telecom])
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "read",
+    possession: "any",
+  })
   async telecoms(
     @graphql.Args() args: TelecomFindManyArgs
   ): Promise<Telecom[]> {
     return this.service.telecoms(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Telecom, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "read",
+    possession: "own",
+  })
   async telecom(
     @graphql.Args() args: TelecomFindUniqueArgs
   ): Promise<Telecom | null> {
@@ -53,7 +81,13 @@ export class TelecomResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Telecom)
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "create",
+    possession: "any",
+  })
   async createTelecom(
     @graphql.Args() args: CreateTelecomArgs
   ): Promise<Telecom> {
@@ -69,7 +103,13 @@ export class TelecomResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Telecom)
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "update",
+    possession: "any",
+  })
   async updateTelecom(
     @graphql.Args() args: UpdateTelecomArgs
   ): Promise<Telecom | null> {
@@ -95,6 +135,11 @@ export class TelecomResolverBase {
   }
 
   @graphql.Mutation(() => Telecom)
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "delete",
+    possession: "any",
+  })
   async deleteTelecom(
     @graphql.Args() args: DeleteTelecomArgs
   ): Promise<Telecom | null> {
@@ -110,9 +155,15 @@ export class TelecomResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Salarie, {
     nullable: true,
     name: "salarie",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "any",
   })
   async getSalarie(@graphql.Parent() parent: Telecom): Promise<Salarie | null> {
     const result = await this.service.getSalarie(parent.id);

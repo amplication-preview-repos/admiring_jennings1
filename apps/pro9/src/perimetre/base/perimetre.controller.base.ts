@@ -16,7 +16,11 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { PerimetreService } from "../perimetre.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { PerimetreCreateInput } from "./PerimetreCreateInput";
 import { Perimetre } from "./Perimetre";
 import { PerimetreFindManyArgs } from "./PerimetreFindManyArgs";
@@ -26,10 +30,24 @@ import { HabilitationFindManyArgs } from "../../habilitation/base/HabilitationFi
 import { Habilitation } from "../../habilitation/base/Habilitation";
 import { HabilitationWhereUniqueInput } from "../../habilitation/base/HabilitationWhereUniqueInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class PerimetreControllerBase {
-  constructor(protected readonly service: PerimetreService) {}
+  constructor(
+    protected readonly service: PerimetreService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Perimetre })
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createPerimetre(
     @common.Body() data: PerimetreCreateInput
   ): Promise<Perimetre> {
@@ -56,9 +74,18 @@ export class PerimetreControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Perimetre] })
   @ApiNestedQuery(PerimetreFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async perimetres(@common.Req() request: Request): Promise<Perimetre[]> {
     const args = plainToClass(PerimetreFindManyArgs, request.query);
     return this.service.perimetres({
@@ -78,9 +105,18 @@ export class PerimetreControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Perimetre })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async perimetre(
     @common.Param() params: PerimetreWhereUniqueInput
   ): Promise<Perimetre | null> {
@@ -107,9 +143,18 @@ export class PerimetreControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Perimetre })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updatePerimetre(
     @common.Param() params: PerimetreWhereUniqueInput,
     @common.Body() data: PerimetreUpdateInput
@@ -150,6 +195,14 @@ export class PerimetreControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Perimetre })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deletePerimetre(
     @common.Param() params: PerimetreWhereUniqueInput
   ): Promise<Perimetre | null> {
@@ -179,8 +232,14 @@ export class PerimetreControllerBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/habilitations")
   @ApiNestedQuery(HabilitationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "any",
+  })
   async findHabilitations(
     @common.Req() request: Request,
     @common.Param() params: PerimetreWhereUniqueInput
@@ -218,6 +277,11 @@ export class PerimetreControllerBase {
   }
 
   @common.Post("/:id/habilitations")
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "update",
+    possession: "any",
+  })
   async connectHabilitations(
     @common.Param() params: PerimetreWhereUniqueInput,
     @common.Body() body: HabilitationWhereUniqueInput[]
@@ -235,6 +299,11 @@ export class PerimetreControllerBase {
   }
 
   @common.Patch("/:id/habilitations")
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "update",
+    possession: "any",
+  })
   async updateHabilitations(
     @common.Param() params: PerimetreWhereUniqueInput,
     @common.Body() body: HabilitationWhereUniqueInput[]
@@ -252,6 +321,11 @@ export class PerimetreControllerBase {
   }
 
   @common.Delete("/:id/habilitations")
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "update",
+    possession: "any",
+  })
   async disconnectHabilitations(
     @common.Param() params: PerimetreWhereUniqueInput,
     @common.Body() body: HabilitationWhereUniqueInput[]

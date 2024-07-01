@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { SalarieService } from "../salarie.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { SalarieCreateInput } from "./SalarieCreateInput";
 import { Salarie } from "./Salarie";
 import { SalarieFindManyArgs } from "./SalarieFindManyArgs";
 import { SalarieWhereUniqueInput } from "./SalarieWhereUniqueInput";
 import { SalarieUpdateInput } from "./SalarieUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class SalarieControllerBase {
-  constructor(protected readonly service: SalarieService) {}
+  constructor(
+    protected readonly service: SalarieService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Salarie })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createSalarie(
     @common.Body() data: SalarieCreateInput
   ): Promise<Salarie> {
@@ -99,9 +117,18 @@ export class SalarieControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Salarie] })
   @ApiNestedQuery(SalarieFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async salaries(@common.Req() request: Request): Promise<Salarie[]> {
     const args = plainToClass(SalarieFindManyArgs, request.query);
     return this.service.salaries({
@@ -149,9 +176,18 @@ export class SalarieControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Salarie })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async salarie(
     @common.Param() params: SalarieWhereUniqueInput
   ): Promise<Salarie | null> {
@@ -206,9 +242,18 @@ export class SalarieControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Salarie })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateSalarie(
     @common.Param() params: SalarieWhereUniqueInput,
     @common.Body() data: SalarieUpdateInput
@@ -295,6 +340,14 @@ export class SalarieControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Salarie })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteSalarie(
     @common.Param() params: SalarieWhereUniqueInput
   ): Promise<Salarie | null> {

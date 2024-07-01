@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { InformationPostaleService } from "../informationPostale.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { InformationPostaleCreateInput } from "./InformationPostaleCreateInput";
 import { InformationPostale } from "./InformationPostale";
 import { InformationPostaleFindManyArgs } from "./InformationPostaleFindManyArgs";
 import { InformationPostaleWhereUniqueInput } from "./InformationPostaleWhereUniqueInput";
 import { InformationPostaleUpdateInput } from "./InformationPostaleUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class InformationPostaleControllerBase {
-  constructor(protected readonly service: InformationPostaleService) {}
+  constructor(
+    protected readonly service: InformationPostaleService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: InformationPostale })
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createInformationPostale(
     @common.Body() data: InformationPostaleCreateInput
   ): Promise<InformationPostale> {
@@ -66,9 +84,18 @@ export class InformationPostaleControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [InformationPostale] })
   @ApiNestedQuery(InformationPostaleFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async informationPostales(
     @common.Req() request: Request
   ): Promise<InformationPostale[]> {
@@ -103,9 +130,18 @@ export class InformationPostaleControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: InformationPostale })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async informationPostale(
     @common.Param() params: InformationPostaleWhereUniqueInput
   ): Promise<InformationPostale | null> {
@@ -145,9 +181,18 @@ export class InformationPostaleControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: InformationPostale })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateInformationPostale(
     @common.Param() params: InformationPostaleWhereUniqueInput,
     @common.Body() data: InformationPostaleUpdateInput
@@ -201,6 +246,14 @@ export class InformationPostaleControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: InformationPostale })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteInformationPostale(
     @common.Param() params: InformationPostaleWhereUniqueInput
   ): Promise<InformationPostale | null> {

@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Salarie } from "./Salarie";
 import { SalarieCountArgs } from "./SalarieCountArgs";
 import { SalarieFindManyArgs } from "./SalarieFindManyArgs";
@@ -25,10 +31,20 @@ import { Adresse } from "../../adresse/base/Adresse";
 import { Identite } from "../../identite/base/Identite";
 import { Telecom } from "../../telecom/base/Telecom";
 import { SalarieService } from "../salarie.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Salarie)
 export class SalarieResolverBase {
-  constructor(protected readonly service: SalarieService) {}
+  constructor(
+    protected readonly service: SalarieService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "any",
+  })
   async _salariesMeta(
     @graphql.Args() args: SalarieCountArgs
   ): Promise<MetaQueryPayload> {
@@ -38,14 +54,26 @@ export class SalarieResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Salarie])
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "any",
+  })
   async salaries(
     @graphql.Args() args: SalarieFindManyArgs
   ): Promise<Salarie[]> {
     return this.service.salaries(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Salarie, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "own",
+  })
   async salarie(
     @graphql.Args() args: SalarieFindUniqueArgs
   ): Promise<Salarie | null> {
@@ -56,7 +84,13 @@ export class SalarieResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Salarie)
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "create",
+    possession: "any",
+  })
   async createSalarie(
     @graphql.Args() args: CreateSalarieArgs
   ): Promise<Salarie> {
@@ -90,7 +124,13 @@ export class SalarieResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Salarie)
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "update",
+    possession: "any",
+  })
   async updateSalarie(
     @graphql.Args() args: UpdateSalarieArgs
   ): Promise<Salarie | null> {
@@ -134,6 +174,11 @@ export class SalarieResolverBase {
   }
 
   @graphql.Mutation(() => Salarie)
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "delete",
+    possession: "any",
+  })
   async deleteSalarie(
     @graphql.Args() args: DeleteSalarieArgs
   ): Promise<Salarie | null> {
@@ -149,9 +194,15 @@ export class SalarieResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Affectation, {
     nullable: true,
     name: "affectations",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "any",
   })
   async getAffectations(
     @graphql.Parent() parent: Salarie
@@ -164,9 +215,15 @@ export class SalarieResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Adresse, {
     nullable: true,
     name: "demenegament",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "read",
+    possession: "any",
   })
   async getDemenegament(
     @graphql.Parent() parent: Salarie
@@ -179,9 +236,15 @@ export class SalarieResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Adresse, {
     nullable: true,
     name: "domiciliation",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "read",
+    possession: "any",
   })
   async getDomiciliation(
     @graphql.Parent() parent: Salarie
@@ -194,9 +257,15 @@ export class SalarieResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Identite, {
     nullable: true,
     name: "identite",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "read",
+    possession: "any",
   })
   async getIdentite(
     @graphql.Parent() parent: Salarie
@@ -209,9 +278,15 @@ export class SalarieResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Telecom, {
     nullable: true,
     name: "telecom",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "read",
+    possession: "any",
   })
   async getTelecom(@graphql.Parent() parent: Salarie): Promise<Telecom | null> {
     const result = await this.service.getTelecom(parent.id);

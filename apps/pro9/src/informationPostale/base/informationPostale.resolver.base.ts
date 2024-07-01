@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { InformationPostale } from "./InformationPostale";
 import { InformationPostaleCountArgs } from "./InformationPostaleCountArgs";
 import { InformationPostaleFindManyArgs } from "./InformationPostaleFindManyArgs";
@@ -22,10 +28,20 @@ import { UpdateInformationPostaleArgs } from "./UpdateInformationPostaleArgs";
 import { DeleteInformationPostaleArgs } from "./DeleteInformationPostaleArgs";
 import { Adresse } from "../../adresse/base/Adresse";
 import { InformationPostaleService } from "../informationPostale.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => InformationPostale)
 export class InformationPostaleResolverBase {
-  constructor(protected readonly service: InformationPostaleService) {}
+  constructor(
+    protected readonly service: InformationPostaleService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "read",
+    possession: "any",
+  })
   async _informationPostalesMeta(
     @graphql.Args() args: InformationPostaleCountArgs
   ): Promise<MetaQueryPayload> {
@@ -35,14 +51,26 @@ export class InformationPostaleResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [InformationPostale])
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "read",
+    possession: "any",
+  })
   async informationPostales(
     @graphql.Args() args: InformationPostaleFindManyArgs
   ): Promise<InformationPostale[]> {
     return this.service.informationPostales(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => InformationPostale, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "read",
+    possession: "own",
+  })
   async informationPostale(
     @graphql.Args() args: InformationPostaleFindUniqueArgs
   ): Promise<InformationPostale | null> {
@@ -53,7 +81,13 @@ export class InformationPostaleResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => InformationPostale)
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "create",
+    possession: "any",
+  })
   async createInformationPostale(
     @graphql.Args() args: CreateInformationPostaleArgs
   ): Promise<InformationPostale> {
@@ -69,7 +103,13 @@ export class InformationPostaleResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => InformationPostale)
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "update",
+    possession: "any",
+  })
   async updateInformationPostale(
     @graphql.Args() args: UpdateInformationPostaleArgs
   ): Promise<InformationPostale | null> {
@@ -95,6 +135,11 @@ export class InformationPostaleResolverBase {
   }
 
   @graphql.Mutation(() => InformationPostale)
+  @nestAccessControl.UseRoles({
+    resource: "InformationPostale",
+    action: "delete",
+    possession: "any",
+  })
   async deleteInformationPostale(
     @graphql.Args() args: DeleteInformationPostaleArgs
   ): Promise<InformationPostale | null> {
@@ -110,9 +155,15 @@ export class InformationPostaleResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Adresse, {
     nullable: true,
     name: "adresse",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Adresse",
+    action: "read",
+    possession: "any",
   })
   async getAdresse(
     @graphql.Parent() parent: InformationPostale

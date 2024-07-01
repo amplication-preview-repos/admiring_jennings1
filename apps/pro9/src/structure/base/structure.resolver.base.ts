@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Structure } from "./Structure";
 import { StructureCountArgs } from "./StructureCountArgs";
 import { StructureFindManyArgs } from "./StructureFindManyArgs";
@@ -24,10 +30,20 @@ import { AffectationFindManyArgs } from "../../affectation/base/AffectationFindM
 import { Affectation } from "../../affectation/base/Affectation";
 import { Perimetre } from "../../perimetre/base/Perimetre";
 import { StructureService } from "../structure.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Structure)
 export class StructureResolverBase {
-  constructor(protected readonly service: StructureService) {}
+  constructor(
+    protected readonly service: StructureService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "read",
+    possession: "any",
+  })
   async _structuresMeta(
     @graphql.Args() args: StructureCountArgs
   ): Promise<MetaQueryPayload> {
@@ -37,14 +53,26 @@ export class StructureResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Structure])
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "read",
+    possession: "any",
+  })
   async structures(
     @graphql.Args() args: StructureFindManyArgs
   ): Promise<Structure[]> {
     return this.service.structures(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Structure, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "read",
+    possession: "own",
+  })
   async structure(
     @graphql.Args() args: StructureFindUniqueArgs
   ): Promise<Structure | null> {
@@ -55,7 +83,13 @@ export class StructureResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Structure)
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "create",
+    possession: "any",
+  })
   async createStructure(
     @graphql.Args() args: CreateStructureArgs
   ): Promise<Structure> {
@@ -77,7 +111,13 @@ export class StructureResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Structure)
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "update",
+    possession: "any",
+  })
   async updateStructure(
     @graphql.Args() args: UpdateStructureArgs
   ): Promise<Structure | null> {
@@ -109,6 +149,11 @@ export class StructureResolverBase {
   }
 
   @graphql.Mutation(() => Structure)
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "delete",
+    possession: "any",
+  })
   async deleteStructure(
     @graphql.Args() args: DeleteStructureArgs
   ): Promise<Structure | null> {
@@ -124,7 +169,13 @@ export class StructureResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Affectation], { name: "affectations" })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "any",
+  })
   async findAffectations(
     @graphql.Parent() parent: Structure,
     @graphql.Args() args: AffectationFindManyArgs
@@ -138,9 +189,15 @@ export class StructureResolverBase {
     return results;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Affectation, {
     nullable: true,
     name: "affectationDomaine",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "any",
   })
   async getAffectationDomaine(
     @graphql.Parent() parent: Structure
@@ -153,9 +210,15 @@ export class StructureResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Perimetre, {
     nullable: true,
     name: "perimetre",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Perimetre",
+    action: "read",
+    possession: "any",
   })
   async getPerimetre(
     @graphql.Parent() parent: Structure

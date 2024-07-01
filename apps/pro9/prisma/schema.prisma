@@ -51,19 +51,19 @@ model Affectation {
 
 model Utilisateur {
   civilite          String?
-  createdAt         DateTime             @default(now())
+  createdAt         DateTime      @default(now())
   dateActivation    DateTime?
   dateDesactivation DateTime?
   email             String?
-  habilitation      Habilitation?        @relation(fields: [habilitationId], references: [id])
-  habilitationId    String?              @unique
-  id                String               @id @default(cuid())
+  habilitation      Habilitation? @relation(fields: [habilitationId], references: [id])
+  habilitationId    String?       @unique
+  id                String        @id @default(cuid())
   mssEmail          String?
   nom               String?
   password          String?
   prenom            String?
-  role              EnumUtilisateurRole?
-  updatedAt         DateTime             @updatedAt
+  roles             Json
+  updatedAt         DateTime      @updatedAt
   username          String?
 }
 
@@ -171,10 +171,6 @@ enum EnumAffectationActivite {
   Domicile
   Soin
   Repas
-}
-
-enum EnumUtilisateurRole {
-  Option1
 }
 
 enum EnumStructureTypeField {

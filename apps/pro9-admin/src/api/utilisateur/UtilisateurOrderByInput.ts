@@ -12,7 +12,7 @@ export type UtilisateurOrderByInput = {
   nom?: SortOrder;
   password?: SortOrder;
   prenom?: SortOrder;
-  role?: SortOrder;
+  roles?: SortOrder;
   updatedAt?: SortOrder;
   username?: SortOrder;
 };

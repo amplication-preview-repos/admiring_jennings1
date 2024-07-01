@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { IdentiteService } from "../identite.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { IdentiteCreateInput } from "./IdentiteCreateInput";
 import { Identite } from "./Identite";
 import { IdentiteFindManyArgs } from "./IdentiteFindManyArgs";
 import { IdentiteWhereUniqueInput } from "./IdentiteWhereUniqueInput";
 import { IdentiteUpdateInput } from "./IdentiteUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class IdentiteControllerBase {
-  constructor(protected readonly service: IdentiteService) {}
+  constructor(
+    protected readonly service: IdentiteService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Identite })
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createIdentite(
     @common.Body() data: IdentiteCreateInput
   ): Promise<Identite> {
@@ -67,9 +85,18 @@ export class IdentiteControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Identite] })
   @ApiNestedQuery(IdentiteFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async identites(@common.Req() request: Request): Promise<Identite[]> {
     const args = plainToClass(IdentiteFindManyArgs, request.query);
     return this.service.identites({
@@ -103,9 +130,18 @@ export class IdentiteControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Identite })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async identite(
     @common.Param() params: IdentiteWhereUniqueInput
   ): Promise<Identite | null> {
@@ -146,9 +182,18 @@ export class IdentiteControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Identite })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateIdentite(
     @common.Param() params: IdentiteWhereUniqueInput,
     @common.Body() data: IdentiteUpdateInput
@@ -203,6 +248,14 @@ export class IdentiteControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Identite })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Identite",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteIdentite(
     @common.Param() params: IdentiteWhereUniqueInput
   ): Promise<Identite | null> {

@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { UtilisateurService } from "../utilisateur.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { UtilisateurCreateInput } from "./UtilisateurCreateInput";
 import { Utilisateur } from "./Utilisateur";
 import { UtilisateurFindManyArgs } from "./UtilisateurFindManyArgs";
 import { UtilisateurWhereUniqueInput } from "./UtilisateurWhereUniqueInput";
 import { UtilisateurUpdateInput } from "./UtilisateurUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UtilisateurControllerBase {
-  constructor(protected readonly service: UtilisateurService) {}
+  constructor(
+    protected readonly service: UtilisateurService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Utilisateur })
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createUtilisateur(
     @common.Body() data: UtilisateurCreateInput
   ): Promise<Utilisateur> {
@@ -57,16 +75,25 @@ export class UtilisateurControllerBase {
         mssEmail: true,
         nom: true,
         prenom: true,
-        role: true,
+        roles: true,
         updatedAt: true,
         username: true,
       },
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Utilisateur] })
   @ApiNestedQuery(UtilisateurFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async utilisateurs(@common.Req() request: Request): Promise<Utilisateur[]> {
     const args = plainToClass(UtilisateurFindManyArgs, request.query);
     return this.service.utilisateurs({
@@ -88,16 +115,25 @@ export class UtilisateurControllerBase {
         mssEmail: true,
         nom: true,
         prenom: true,
-        role: true,
+        roles: true,
         updatedAt: true,
         username: true,
       },
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Utilisateur })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async utilisateur(
     @common.Param() params: UtilisateurWhereUniqueInput
   ): Promise<Utilisateur | null> {
@@ -120,7 +156,7 @@ export class UtilisateurControllerBase {
         mssEmail: true,
         nom: true,
         prenom: true,
-        role: true,
+        roles: true,
         updatedAt: true,
         username: true,
       },
@@ -133,9 +169,18 @@ export class UtilisateurControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Utilisateur })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateUtilisateur(
     @common.Param() params: UtilisateurWhereUniqueInput,
     @common.Body() data: UtilisateurUpdateInput
@@ -169,7 +214,7 @@ export class UtilisateurControllerBase {
           mssEmail: true,
           nom: true,
           prenom: true,
-          role: true,
+          roles: true,
           updatedAt: true,
           username: true,
         },
@@ -187,6 +232,14 @@ export class UtilisateurControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Utilisateur })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteUtilisateur(
     @common.Param() params: UtilisateurWhereUniqueInput
   ): Promise<Utilisateur | null> {
@@ -210,7 +263,7 @@ export class UtilisateurControllerBase {
           mssEmail: true,
           nom: true,
           prenom: true,
-          role: true,
+          roles: true,
           updatedAt: true,
           username: true,
         },

@@ -1,0 +1,1418 @@
+[
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Habilitation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Habilitation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Habilitation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Habilitation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Habilitation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Perimetre",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Perimetre",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Perimetre",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Perimetre",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Perimetre",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Salarie",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Salarie",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Salarie",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "Salarie",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFDRal",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "lim",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tendu",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  }
+]

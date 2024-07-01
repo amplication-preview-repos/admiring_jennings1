@@ -13,6 +13,12 @@ import * as graphql from "@nestjs/graphql";
 import { GraphQLError } from "graphql";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import * as nestAccessControl from "nest-access-control";
+import * as gqlACGuard from "../../auth/gqlAC.guard";
+import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
+import * as common from "@nestjs/common";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { Utilisateur } from "./Utilisateur";
 import { UtilisateurCountArgs } from "./UtilisateurCountArgs";
 import { UtilisateurFindManyArgs } from "./UtilisateurFindManyArgs";
@@ -22,10 +28,20 @@ import { UpdateUtilisateurArgs } from "./UpdateUtilisateurArgs";
 import { DeleteUtilisateurArgs } from "./DeleteUtilisateurArgs";
 import { Habilitation } from "../../habilitation/base/Habilitation";
 import { UtilisateurService } from "../utilisateur.service";
+@common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Utilisateur)
 export class UtilisateurResolverBase {
-  constructor(protected readonly service: UtilisateurService) {}
+  constructor(
+    protected readonly service: UtilisateurService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
 
+  @graphql.Query(() => MetaQueryPayload)
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "read",
+    possession: "any",
+  })
   async _utilisateursMeta(
     @graphql.Args() args: UtilisateurCountArgs
   ): Promise<MetaQueryPayload> {
@@ -35,14 +51,26 @@ export class UtilisateurResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Utilisateur])
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "read",
+    possession: "any",
+  })
   async utilisateurs(
     @graphql.Args() args: UtilisateurFindManyArgs
   ): Promise<Utilisateur[]> {
     return this.service.utilisateurs(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Utilisateur, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "read",
+    possession: "own",
+  })
   async utilisateur(
     @graphql.Args() args: UtilisateurFindUniqueArgs
   ): Promise<Utilisateur | null> {
@@ -53,7 +81,13 @@ export class UtilisateurResolverBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Utilisateur)
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "create",
+    possession: "any",
+  })
   async createUtilisateur(
     @graphql.Args() args: CreateUtilisateurArgs
   ): Promise<Utilisateur> {
@@ -71,7 +105,13 @@ export class UtilisateurResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Utilisateur)
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "update",
+    possession: "any",
+  })
   async updateUtilisateur(
     @graphql.Args() args: UpdateUtilisateurArgs
   ): Promise<Utilisateur | null> {
@@ -99,6 +139,11 @@ export class UtilisateurResolverBase {
   }
 
   @graphql.Mutation(() => Utilisateur)
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "delete",
+    possession: "any",
+  })
   async deleteUtilisateur(
     @graphql.Args() args: DeleteUtilisateurArgs
   ): Promise<Utilisateur | null> {
@@ -114,9 +159,15 @@ export class UtilisateurResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Habilitation, {
     nullable: true,
     name: "habilitation",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Habilitation",
+    action: "read",
+    possession: "any",
   })
   async getHabilitation(
     @graphql.Parent() parent: Utilisateur

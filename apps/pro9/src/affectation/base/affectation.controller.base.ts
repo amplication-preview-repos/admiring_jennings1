@@ -16,17 +16,35 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
+import * as nestAccessControl from "nest-access-control";
+import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
 import { AffectationService } from "../affectation.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { AffectationCreateInput } from "./AffectationCreateInput";
 import { Affectation } from "./Affectation";
 import { AffectationFindManyArgs } from "./AffectationFindManyArgs";
 import { AffectationWhereUniqueInput } from "./AffectationWhereUniqueInput";
 import { AffectationUpdateInput } from "./AffectationUpdateInput";
 
+@swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AffectationControllerBase {
-  constructor(protected readonly service: AffectationService) {}
+  constructor(
+    protected readonly service: AffectationService,
+    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
+  ) {}
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Affectation })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "create",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async createAffectation(
     @common.Body() data: AffectationCreateInput
   ): Promise<Affectation> {
@@ -77,9 +95,18 @@ export class AffectationControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get()
   @swagger.ApiOkResponse({ type: [Affectation] })
   @ApiNestedQuery(AffectationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async affectations(@common.Req() request: Request): Promise<Affectation[]> {
     const args = plainToClass(AffectationFindManyArgs, request.query);
     return this.service.affectations({
@@ -113,9 +140,18 @@ export class AffectationControllerBase {
     });
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Affectation })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "own",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async affectation(
     @common.Param() params: AffectationWhereUniqueInput
   ): Promise<Affectation | null> {
@@ -156,9 +192,18 @@ export class AffectationControllerBase {
     return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Affectation })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "update",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async updateAffectation(
     @common.Param() params: AffectationWhereUniqueInput,
     @common.Body() data: AffectationUpdateInput
@@ -223,6 +268,14 @@ export class AffectationControllerBase {
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Affectation })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "delete",
+    possession: "any",
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
   async deleteAffectation(
     @common.Param() params: AffectationWhereUniqueInput
   ): Promise<Affectation | null> {

@@ -13,6 +13,5 @@ export type UtilisateurWhereInput = {
   mssEmail?: StringNullableFilter;
   nom?: StringNullableFilter;
   prenom?: StringNullableFilter;
-  role?: "Option1";
   username?: StringNullableFilter;
 };
