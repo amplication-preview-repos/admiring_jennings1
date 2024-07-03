@@ -1,12 +1,16 @@
 import * as React from "react";
+
 import {
   Create,
   SimpleForm,
   CreateProps,
+  ReferenceArrayInput,
+  SelectArrayInput,
   ReferenceInput,
   SelectInput,
   BooleanInput,
 } from "react-admin";
+
 import { AffectationTitle } from "../affectation/AffectationTitle";
 import { AdresseTitle } from "../adresse/AdresseTitle";
 import { IdentiteTitle } from "../identite/IdentiteTitle";
@@ -16,17 +20,18 @@ export const SalarieCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput
-          source="affectations.id"
+        <ReferenceArrayInput
+          source="affectations"
           reference="Affectation"
-          label="Affectation"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
         >
-          <SelectInput optionText={AffectationTitle} />
-        </ReferenceInput>
+          <SelectArrayInput optionText={AffectationTitle} />
+        </ReferenceArrayInput>
         <ReferenceInput
           source="demenegament.id"
           reference="Adresse"
-          label="Déménagement"
+          label="Demenagement"
         >
           <SelectInput optionText={AdresseTitle} />
         </ReferenceInput>

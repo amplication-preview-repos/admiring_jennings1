@@ -19,10 +19,10 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Perimetre } from "../../perimetre/base/Perimetre";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { Structure } from "../../structure/base/Structure";
 
 @ObjectType()
 class Utilisateur {
@@ -92,31 +92,12 @@ class Utilisateur {
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  mssEmail!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
   @MaxLength(1000)
   @IsOptional()
   @Field(() => String, {
     nullable: true,
   })
   nom!: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: () => Perimetre,
-  })
-  @ValidateNested()
-  @Type(() => Perimetre)
-  perimetre?: Perimetre;
 
   @ApiProperty({
     required: false,
@@ -136,6 +117,15 @@ class Utilisateur {
   @IsJSONValue()
   @Field(() => GraphQLJSON)
   roles!: JsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Structure],
+  })
+  @ValidateNested()
+  @Type(() => Structure)
+  @IsOptional()
+  structures?: Array<Structure>;
 
   @ApiProperty({
     required: true,

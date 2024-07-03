@@ -15,7 +15,7 @@ import {
   Prisma,
   Structure as PrismaStructure,
   Affectation as PrismaAffectation,
-  Perimetre as PrismaPerimetre,
+  Utilisateur as PrismaUtilisateur,
 } from "@prisma/client";
 
 export class StructureServiceBase {
@@ -74,11 +74,11 @@ export class StructureServiceBase {
       .affectationDomaine();
   }
 
-  async getPerimetre(parentId: string): Promise<PrismaPerimetre | null> {
+  async getUtilisateur(parentId: string): Promise<PrismaUtilisateur | null> {
     return this.prisma.structure
       .findUnique({
         where: { id: parentId },
       })
-      .perimetre();
+      .utilisateur();
   }
 }

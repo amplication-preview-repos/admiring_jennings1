@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AffectationWhereUniqueInput } from "../../affectation/base/AffectationWhereUniqueInput";
+import { AffectationListRelationFilter } from "../../affectation/base/AffectationListRelationFilter";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { AdresseWhereUniqueInput } from "../../adresse/base/AdresseWhereUniqueInput";
@@ -24,15 +24,15 @@ import { TelecomWhereUniqueInput } from "../../telecom/base/TelecomWhereUniqueIn
 class SalarieWhereInput {
   @ApiProperty({
     required: false,
-    type: () => AffectationWhereUniqueInput,
+    type: () => AffectationListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => AffectationWhereUniqueInput)
+  @Type(() => AffectationListRelationFilter)
   @IsOptional()
-  @Field(() => AffectationWhereUniqueInput, {
+  @Field(() => AffectationListRelationFilter, {
     nullable: true,
   })
-  affectations?: AffectationWhereUniqueInput;
+  affectations?: AffectationListRelationFilter;
 
   @ApiProperty({
     required: false,

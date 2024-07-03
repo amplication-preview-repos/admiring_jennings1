@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
+import { SalarieUpdateManyWithoutTelecomsInput } from "./SalarieUpdateManyWithoutTelecomsInput";
 import {
   ValidateNested,
   IsOptional,
@@ -28,15 +28,15 @@ import { InputJsonValue } from "../../types";
 class TelecomUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => SalarieWhereUniqueInput,
+    type: () => SalarieUpdateManyWithoutTelecomsInput,
   })
   @ValidateNested()
-  @Type(() => SalarieWhereUniqueInput)
+  @Type(() => SalarieUpdateManyWithoutTelecomsInput)
   @IsOptional()
-  @Field(() => SalarieWhereUniqueInput, {
+  @Field(() => SalarieUpdateManyWithoutTelecomsInput, {
     nullable: true,
   })
-  Salarie?: SalarieWhereUniqueInput | null;
+  Salarie?: SalarieUpdateManyWithoutTelecomsInput;
 
   @ApiProperty({
     required: false,

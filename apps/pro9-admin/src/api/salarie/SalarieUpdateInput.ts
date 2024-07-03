@@ -1,10 +1,10 @@
-import { AffectationWhereUniqueInput } from "../affectation/AffectationWhereUniqueInput";
+import { AffectationUpdateManyWithoutSalariesInput } from "./AffectationUpdateManyWithoutSalariesInput";
 import { AdresseWhereUniqueInput } from "../adresse/AdresseWhereUniqueInput";
 import { IdentiteWhereUniqueInput } from "../identite/IdentiteWhereUniqueInput";
 import { TelecomWhereUniqueInput } from "../telecom/TelecomWhereUniqueInput";
 
 export type SalarieUpdateInput = {
-  affectations?: AffectationWhereUniqueInput;
+  affectations?: AffectationUpdateManyWithoutSalariesInput;
   demenegament?: AdresseWhereUniqueInput;
   domiciliation?: AdresseWhereUniqueInput;
   identite?: IdentiteWhereUniqueInput;

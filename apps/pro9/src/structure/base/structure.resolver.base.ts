@@ -28,7 +28,7 @@ import { UpdateStructureArgs } from "./UpdateStructureArgs";
 import { DeleteStructureArgs } from "./DeleteStructureArgs";
 import { AffectationFindManyArgs } from "../../affectation/base/AffectationFindManyArgs";
 import { Affectation } from "../../affectation/base/Affectation";
-import { Perimetre } from "../../perimetre/base/Perimetre";
+import { Utilisateur } from "../../utilisateur/base/Utilisateur";
 import { StructureService } from "../structure.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Structure)
@@ -104,9 +104,11 @@ export class StructureResolverBase {
             }
           : undefined,
 
-        perimetre: {
-          connect: args.data.perimetre,
-        },
+        utilisateur: args.data.utilisateur
+          ? {
+              connect: args.data.utilisateur,
+            }
+          : undefined,
       },
     });
   }
@@ -133,9 +135,11 @@ export class StructureResolverBase {
               }
             : undefined,
 
-          perimetre: {
-            connect: args.data.perimetre,
-          },
+          utilisateur: args.data.utilisateur
+            ? {
+                connect: args.data.utilisateur,
+              }
+            : undefined,
         },
       });
     } catch (error) {
@@ -211,19 +215,19 @@ export class StructureResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Perimetre, {
+  @graphql.ResolveField(() => Utilisateur, {
     nullable: true,
-    name: "perimetre",
+    name: "utilisateur",
   })
   @nestAccessControl.UseRoles({
-    resource: "Perimetre",
+    resource: "Utilisateur",
     action: "read",
     possession: "any",
   })
-  async getPerimetre(
+  async getUtilisateur(
     @graphql.Parent() parent: Structure
-  ): Promise<Perimetre | null> {
-    const result = await this.service.getPerimetre(parent.id);
+  ): Promise<Utilisateur | null> {
+    const result = await this.service.getUtilisateur(parent.id);
 
     if (!result) {
       return null;

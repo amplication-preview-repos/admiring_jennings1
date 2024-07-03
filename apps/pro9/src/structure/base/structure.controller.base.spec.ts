@@ -18,29 +18,29 @@ import { StructureService } from "../structure.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  code: "exampleCode",
   createdAt: new Date(),
   id: "exampleId",
-  libell: "exampleLibell",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  code: "exampleCode",
   createdAt: new Date(),
   id: "exampleId",
-  libell: "exampleLibell",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    code: "exampleCode",
     createdAt: new Date(),
     id: "exampleId",
-    libell: "exampleLibell",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  code: "exampleCode",
   createdAt: new Date(),
   id: "exampleId",
-  libell: "exampleLibell",
   updatedAt: new Date(),
 };
 

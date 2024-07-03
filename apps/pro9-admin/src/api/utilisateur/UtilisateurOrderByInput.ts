@@ -7,10 +7,8 @@ export type UtilisateurOrderByInput = {
   dateDesactivation?: SortOrder;
   email?: SortOrder;
   id?: SortOrder;
-  mssEmail?: SortOrder;
   nom?: SortOrder;
   password?: SortOrder;
-  perimetreId?: SortOrder;
   prenom?: SortOrder;
   roles?: SortOrder;
   updatedAt?: SortOrder;

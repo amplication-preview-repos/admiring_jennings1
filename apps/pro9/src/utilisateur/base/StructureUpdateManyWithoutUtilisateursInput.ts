@@ -10,37 +10,37 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
-import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
+import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class UtilisateurUpdateManyWithoutPerimetresInput {
-  @Field(() => [UtilisateurWhereUniqueInput], {
+class StructureUpdateManyWithoutUtilisateursInput {
+  @Field(() => [StructureWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [UtilisateurWhereUniqueInput],
+    type: () => [StructureWhereUniqueInput],
   })
-  connect?: Array<UtilisateurWhereUniqueInput>;
+  connect?: Array<StructureWhereUniqueInput>;
 
-  @Field(() => [UtilisateurWhereUniqueInput], {
+  @Field(() => [StructureWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [UtilisateurWhereUniqueInput],
+    type: () => [StructureWhereUniqueInput],
   })
-  disconnect?: Array<UtilisateurWhereUniqueInput>;
+  disconnect?: Array<StructureWhereUniqueInput>;
 
-  @Field(() => [UtilisateurWhereUniqueInput], {
+  @Field(() => [StructureWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [UtilisateurWhereUniqueInput],
+    type: () => [StructureWhereUniqueInput],
   })
-  set?: Array<UtilisateurWhereUniqueInput>;
+  set?: Array<StructureWhereUniqueInput>;
 }
 
-export { UtilisateurUpdateManyWithoutPerimetresInput as UtilisateurUpdateManyWithoutPerimetresInput };
+export { StructureUpdateManyWithoutUtilisateursInput as StructureUpdateManyWithoutUtilisateursInput };

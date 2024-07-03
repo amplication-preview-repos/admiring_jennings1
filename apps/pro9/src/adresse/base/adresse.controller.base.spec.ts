@@ -22,6 +22,8 @@ const CREATE_INPUT = {
   debutValidite: new Date(),
   finValidite: new Date(),
   id: "exampleId",
+  localisationInitiale: "exampleLocalisationInitiale",
+  localisationPrecise: "exampleLocalisationPrecise",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
@@ -29,6 +31,8 @@ const CREATE_RESULT = {
   debutValidite: new Date(),
   finValidite: new Date(),
   id: "exampleId",
+  localisationInitiale: "exampleLocalisationInitiale",
+  localisationPrecise: "exampleLocalisationPrecise",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -37,6 +41,8 @@ const FIND_MANY_RESULT = [
     debutValidite: new Date(),
     finValidite: new Date(),
     id: "exampleId",
+    localisationInitiale: "exampleLocalisationInitiale",
+    localisationPrecise: "exampleLocalisationPrecise",
     updatedAt: new Date(),
   },
 ];
@@ -45,6 +51,8 @@ const FIND_ONE_RESULT = {
   debutValidite: new Date(),
   finValidite: new Date(),
   id: "exampleId",
+  localisationInitiale: "exampleLocalisationInitiale",
+  localisationPrecise: "exampleLocalisationPrecise",
   updatedAt: new Date(),
 };
 

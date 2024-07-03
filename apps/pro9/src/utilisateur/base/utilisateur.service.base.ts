@@ -13,7 +13,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   Utilisateur as PrismaUtilisateur,
-  Perimetre as PrismaPerimetre,
+  Structure as PrismaStructure,
 } from "@prisma/client";
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
@@ -77,11 +77,14 @@ export class UtilisateurServiceBase {
     return this.prisma.utilisateur.delete(args);
   }
 
-  async getPerimetre(parentId: string): Promise<PrismaPerimetre | null> {
+  async findStructures(
+    parentId: string,
+    args: Prisma.StructureFindManyArgs
+  ): Promise<PrismaStructure[]> {
     return this.prisma.utilisateur
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .perimetre();
+      .structures(args);
   }
 }

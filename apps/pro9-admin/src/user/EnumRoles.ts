@@ -1,8 +1,8 @@
 export enum EnumRoles {
   AdminCentral = "adminCentral",
-  AdminFDRal = "adminFDRal",
-  Limit = "lim",
+  AdminFederal = "adminFederal",
+  Etendu = "Etendu",
+  Limite = "limite",
   Standard = "standard",
-  Tendu = "tendu",
   Utilisateur = "Utilisateur",
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Edit,
   SimpleForm,
@@ -6,7 +7,9 @@ import {
   DateTimeInput,
   ReferenceInput,
   SelectInput,
+  TextInput,
 } from "react-admin";
+
 import { SalarieTitle } from "../salarie/SalarieTitle";
 import { InformationPostaleTitle } from "../informationPostale/InformationPostaleTitle";
 
@@ -25,7 +28,7 @@ export const AdresseEdit = (props: EditProps): React.ReactElement => {
         <ReferenceInput
           source="DomiciliationSalarie.id"
           reference="Salarie"
-          label="Domiciliation salarié"
+          label="Domiciliation salarie"
         >
           <SelectInput optionText={SalarieTitle} />
         </ReferenceInput>
@@ -37,6 +40,11 @@ export const AdresseEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectInput optionText={InformationPostaleTitle} />
         </ReferenceInput>
+        <TextInput
+          label="Localisation Initiale"
+          source="localisationInitiale"
+        />
+        <TextInput label="Localisation precise" source="localisationPrecise" />
       </SimpleForm>
     </Edit>
   );

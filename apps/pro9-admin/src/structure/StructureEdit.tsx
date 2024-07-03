@@ -12,7 +12,7 @@ import {
 } from "react-admin";
 
 import { AffectationTitle } from "../affectation/AffectationTitle";
-import { PerimetreTitle } from "../perimetre/PerimetreTitle";
+import { UtilisateurTitle } from "../utilisateur/UtilisateurTitle";
 
 export const StructureEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -33,14 +33,7 @@ export const StructureEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={AffectationTitle} />
         </ReferenceArrayInput>
-        <TextInput label="Libellé" source="libell" />
-        <ReferenceInput
-          source="perimetre.id"
-          reference="Perimetre"
-          label="Périmètre"
-        >
-          <SelectInput optionText={PerimetreTitle} />
-        </ReferenceInput>
+        <TextInput label="Code" source="code" />
         <SelectInput
           source="typeField"
           label="Type"
@@ -53,6 +46,13 @@ export const StructureEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
+        <ReferenceInput
+          source="utilisateur.id"
+          reference="Utilisateur"
+          label="Utilisateur"
+        >
+          <SelectInput optionText={UtilisateurTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Edit>
   );

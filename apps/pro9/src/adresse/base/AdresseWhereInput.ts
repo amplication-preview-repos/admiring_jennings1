@@ -18,6 +18,7 @@ import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueIn
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { InformationPostaleWhereUniqueInput } from "../../informationPostale/base/InformationPostaleWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 @InputType()
 class AdresseWhereInput {
@@ -89,6 +90,28 @@ class AdresseWhereInput {
     nullable: true,
   })
   informationPostale?: InformationPostaleWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  localisationInitiale?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  localisationPrecise?: StringNullableFilter;
 }
 
 export { AdresseWhereInput as AdresseWhereInput };

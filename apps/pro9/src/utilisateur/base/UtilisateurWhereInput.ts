@@ -16,7 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
+import { StructureListRelationFilter } from "../../structure/base/StructureListRelationFilter";
 
 @InputType()
 class UtilisateurWhereInput {
@@ -84,30 +84,7 @@ class UtilisateurWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  mssEmail?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
   nom?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => PerimetreWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => PerimetreWhereUniqueInput)
-  @IsOptional()
-  @Field(() => PerimetreWhereUniqueInput, {
-    nullable: true,
-  })
-  perimetre?: PerimetreWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -119,6 +96,18 @@ class UtilisateurWhereInput {
     nullable: true,
   })
   prenom?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => StructureListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => StructureListRelationFilter)
+  @IsOptional()
+  @Field(() => StructureListRelationFilter, {
+    nullable: true,
+  })
+  structures?: StructureListRelationFilter;
 
   @ApiProperty({
     required: false,

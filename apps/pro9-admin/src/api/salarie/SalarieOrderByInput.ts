@@ -1,7 +1,6 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type SalarieOrderByInput = {
-  affectation?: SortOrder;
   createdAt?: SortOrder;
   demenagementId?: SortOrder;
   domiciliationId?: SortOrder;

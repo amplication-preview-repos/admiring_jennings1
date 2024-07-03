@@ -50,17 +50,6 @@ class TelecomOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  SalarieId?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   typeMoyen?: SortOrder;
 
   @ApiProperty({

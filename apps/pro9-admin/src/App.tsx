@@ -21,10 +21,6 @@ import { UtilisateurList } from "./utilisateur/UtilisateurList";
 import { UtilisateurCreate } from "./utilisateur/UtilisateurCreate";
 import { UtilisateurEdit } from "./utilisateur/UtilisateurEdit";
 import { UtilisateurShow } from "./utilisateur/UtilisateurShow";
-import { PerimetreList } from "./perimetre/PerimetreList";
-import { PerimetreCreate } from "./perimetre/PerimetreCreate";
-import { PerimetreEdit } from "./perimetre/PerimetreEdit";
-import { PerimetreShow } from "./perimetre/PerimetreShow";
 import { AdresseList } from "./adresse/AdresseList";
 import { AdresseCreate } from "./adresse/AdresseCreate";
 import { AdresseEdit } from "./adresse/AdresseEdit";
@@ -94,13 +90,6 @@ const App = (): React.ReactElement => {
           edit={UtilisateurEdit}
           create={UtilisateurCreate}
           show={UtilisateurShow}
-        />
-        <Resource
-          name="Perimetre"
-          list={PerimetreList}
-          edit={PerimetreEdit}
-          create={PerimetreCreate}
-          show={PerimetreShow}
         />
         <Resource
           name="Adresse"

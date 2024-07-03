@@ -42,11 +42,14 @@ export class TelecomServiceBase {
     return this.prisma.telecom.delete(args);
   }
 
-  async getSalarie(parentId: string): Promise<PrismaSalarie | null> {
+  async findSalarie(
+    parentId: string,
+    args: Prisma.SalarieFindManyArgs
+  ): Promise<PrismaSalarie[]> {
     return this.prisma.telecom
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .Salarie();
+      .Salarie(args);
   }
 }

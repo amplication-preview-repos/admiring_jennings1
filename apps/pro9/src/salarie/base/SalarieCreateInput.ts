@@ -11,8 +11,8 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AffectationWhereUniqueInput } from "../../affectation/base/AffectationWhereUniqueInput";
-import { ValidateNested, IsBoolean, IsOptional } from "class-validator";
+import { AffectationCreateNestedManyWithoutSalariesInput } from "./AffectationCreateNestedManyWithoutSalariesInput";
+import { ValidateNested, IsOptional, IsBoolean } from "class-validator";
 import { Type } from "class-transformer";
 import { AdresseWhereUniqueInput } from "../../adresse/base/AdresseWhereUniqueInput";
 import { IdentiteWhereUniqueInput } from "../../identite/base/IdentiteWhereUniqueInput";
@@ -22,12 +22,15 @@ import { TelecomWhereUniqueInput } from "../../telecom/base/TelecomWhereUniqueIn
 class SalarieCreateInput {
   @ApiProperty({
     required: true,
-    type: () => AffectationWhereUniqueInput,
+    type: () => AffectationCreateNestedManyWithoutSalariesInput,
   })
   @ValidateNested()
-  @Type(() => AffectationWhereUniqueInput)
-  @Field(() => AffectationWhereUniqueInput)
-  affectations!: AffectationWhereUniqueInput;
+  @Type(() => AffectationCreateNestedManyWithoutSalariesInput)
+  @IsOptional()
+  @Field(() => AffectationCreateNestedManyWithoutSalariesInput, {
+    nullable: true,
+  })
+  affectations?: AffectationCreateNestedManyWithoutSalariesInput;
 
   @ApiProperty({
     required: true,

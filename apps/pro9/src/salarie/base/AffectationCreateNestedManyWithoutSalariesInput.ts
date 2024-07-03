@@ -10,19 +10,19 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
-import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
+import { AffectationWhereUniqueInput } from "../../affectation/base/AffectationWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class UtilisateurCreateNestedManyWithoutPerimetresInput {
-  @Field(() => [UtilisateurWhereUniqueInput], {
+class AffectationCreateNestedManyWithoutSalariesInput {
+  @Field(() => [AffectationWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [UtilisateurWhereUniqueInput],
+    type: () => [AffectationWhereUniqueInput],
   })
-  connect?: Array<UtilisateurWhereUniqueInput>;
+  connect?: Array<AffectationWhereUniqueInput>;
 }
 
-export { UtilisateurCreateNestedManyWithoutPerimetresInput as UtilisateurCreateNestedManyWithoutPerimetresInput };
+export { AffectationCreateNestedManyWithoutSalariesInput as AffectationCreateNestedManyWithoutSalariesInput };

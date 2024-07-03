@@ -9,5 +9,7 @@ export type Adresse = {
   finValidite: Date | null;
   id: string;
   informationPostale?: InformationPostale;
+  localisationInitiale: string | null;
+  localisationPrecise: string | null;
   updatedAt: Date;
 };

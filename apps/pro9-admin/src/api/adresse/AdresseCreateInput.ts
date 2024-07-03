@@ -7,4 +7,6 @@ export type AdresseCreateInput = {
   DomiciliationSalarie?: SalarieWhereUniqueInput | null;
   finValidite?: Date | null;
   informationPostale: InformationPostaleWhereUniqueInput;
+  localisationInitiale?: string | null;
+  localisationPrecise?: string | null;
 };

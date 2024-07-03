@@ -61,9 +61,11 @@ export class StructureControllerBase {
             }
           : undefined,
 
-        perimetre: {
-          connect: data.perimetre,
-        },
+        utilisateur: data.utilisateur
+          ? {
+              connect: data.utilisateur,
+            }
+          : undefined,
       },
       select: {
         affectationDomaine: {
@@ -72,18 +74,17 @@ export class StructureControllerBase {
           },
         },
 
+        code: true,
         createdAt: true,
         id: true,
-        libell: true,
+        typeField: true,
+        updatedAt: true,
 
-        perimetre: {
+        utilisateur: {
           select: {
             id: true,
           },
         },
-
-        typeField: true,
-        updatedAt: true,
       },
     });
   }
@@ -111,18 +112,17 @@ export class StructureControllerBase {
           },
         },
 
+        code: true,
         createdAt: true,
         id: true,
-        libell: true,
+        typeField: true,
+        updatedAt: true,
 
-        perimetre: {
+        utilisateur: {
           select: {
             id: true,
           },
         },
-
-        typeField: true,
-        updatedAt: true,
       },
     });
   }
@@ -151,18 +151,17 @@ export class StructureControllerBase {
           },
         },
 
+        code: true,
         createdAt: true,
         id: true,
-        libell: true,
+        typeField: true,
+        updatedAt: true,
 
-        perimetre: {
+        utilisateur: {
           select: {
             id: true,
           },
         },
-
-        typeField: true,
-        updatedAt: true,
       },
     });
     if (result === null) {
@@ -201,9 +200,11 @@ export class StructureControllerBase {
               }
             : undefined,
 
-          perimetre: {
-            connect: data.perimetre,
-          },
+          utilisateur: data.utilisateur
+            ? {
+                connect: data.utilisateur,
+              }
+            : undefined,
         },
         select: {
           affectationDomaine: {
@@ -212,18 +213,17 @@ export class StructureControllerBase {
             },
           },
 
+          code: true,
           createdAt: true,
           id: true,
-          libell: true,
+          typeField: true,
+          updatedAt: true,
 
-          perimetre: {
+          utilisateur: {
             select: {
               id: true,
             },
           },
-
-          typeField: true,
-          updatedAt: true,
         },
       });
     } catch (error) {
@@ -260,18 +260,17 @@ export class StructureControllerBase {
             },
           },
 
+          code: true,
           createdAt: true,
           id: true,
-          libell: true,
+          typeField: true,
+          updatedAt: true,
 
-          perimetre: {
+          utilisateur: {
             select: {
               id: true,
             },
           },
-
-          typeField: true,
-          updatedAt: true,
         },
       });
     } catch (error) {

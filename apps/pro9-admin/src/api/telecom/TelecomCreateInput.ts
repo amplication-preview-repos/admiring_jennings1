@@ -1,9 +1,9 @@
-import { SalarieWhereUniqueInput } from "../salarie/SalarieWhereUniqueInput";
+import { SalarieCreateNestedManyWithoutTelecomsInput } from "./SalarieCreateNestedManyWithoutTelecomsInput";
 import { Salarie } from "../salarie/Salarie";
 import { InputJsonValue } from "../../types";
 
 export type TelecomCreateInput = {
-  Salarie: SalarieWhereUniqueInput | null;
+  Salarie?: SalarieCreateNestedManyWithoutTelecomsInput;
   typeMoyen: string;
   valeurMoyen: InputJsonValue;
 };

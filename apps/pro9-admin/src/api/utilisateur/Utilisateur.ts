@@ -1,5 +1,5 @@
-import { Perimetre } from "../perimetre/Perimetre";
 import { JsonValue } from "type-fest";
+import { Structure } from "../structure/Structure";
 
 export type Utilisateur = {
   civilite: string | null;
@@ -8,11 +8,10 @@ export type Utilisateur = {
   dateDesactivation: Date | null;
   email: string | null;
   id: string;
-  mssEmail: string | null;
   nom: string | null;
-  perimetre?: Perimetre;
   prenom: string | null;
   roles: JsonValue;
+  structures?: Array<Structure>;
   updatedAt: Date;
   username: string | null;
 };

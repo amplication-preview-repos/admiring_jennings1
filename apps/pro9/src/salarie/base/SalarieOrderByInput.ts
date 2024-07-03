@@ -28,17 +28,6 @@ class SalarieOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  affectation?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   createdAt?: SortOrder;
 
   @ApiProperty({

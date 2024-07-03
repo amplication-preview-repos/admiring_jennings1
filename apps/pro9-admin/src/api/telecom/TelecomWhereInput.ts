@@ -1,11 +1,11 @@
 import { StringFilter } from "../../util/StringFilter";
-import { SalarieWhereUniqueInput } from "../salarie/SalarieWhereUniqueInput";
+import { SalarieListRelationFilter } from "../salarie/SalarieListRelationFilter";
 import { Salarie } from "../salarie/Salarie";
 import { JsonFilter } from "../../util/JsonFilter";
 
 export type TelecomWhereInput = {
   id?: StringFilter;
-  Salarie?: SalarieWhereUniqueInput;
+  Salarie?: SalarieListRelationFilter;
   typeMoyen?: StringFilter;
   valeurMoyen?: JsonFilter;
 };

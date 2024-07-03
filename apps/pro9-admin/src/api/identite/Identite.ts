@@ -1,4 +1,3 @@
-import { JsonValue } from "type-fest";
 import { Salarie } from "../salarie/Salarie";
 
 export type Identite = {
@@ -13,7 +12,7 @@ export type Identite = {
   nomNaissance: string;
   nomUsuel: string;
   numeroInsee: string | null;
-  paysDeNaissance: JsonValue;
+  paysDeNaissance: string;
   premierPrenom: string;
   prenoms: string;
   prenomUsuel: string;

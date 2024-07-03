@@ -1,11 +1,11 @@
 import { AffectationWhereUniqueInput } from "../affectation/AffectationWhereUniqueInput";
 import { AffectationUpdateManyWithoutStructuresInput } from "./AffectationUpdateManyWithoutStructuresInput";
-import { PerimetreWhereUniqueInput } from "../perimetre/PerimetreWhereUniqueInput";
+import { UtilisateurWhereUniqueInput } from "../utilisateur/UtilisateurWhereUniqueInput";
 
 export type StructureUpdateInput = {
   affectationDomaine?: AffectationWhereUniqueInput | null;
   affectations?: AffectationUpdateManyWithoutStructuresInput;
-  libell?: string;
-  perimetre?: PerimetreWhereUniqueInput | null;
+  code?: string;
   typeField?: "Agence" | "Association" | "Federation" | null;
+  utilisateur?: UtilisateurWhereUniqueInput | null;
 };

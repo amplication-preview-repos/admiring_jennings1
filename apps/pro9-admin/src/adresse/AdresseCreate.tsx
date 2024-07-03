@@ -7,6 +7,7 @@ import {
   DateTimeInput,
   ReferenceInput,
   SelectInput,
+  TextInput,
 } from "react-admin";
 
 import { SalarieTitle } from "../salarie/SalarieTitle";
@@ -27,7 +28,7 @@ export const AdresseCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput
           source="DomiciliationSalarie.id"
           reference="Salarie"
-          label="Domiciliation salarié"
+          label="Domiciliation salarie"
         >
           <SelectInput optionText={SalarieTitle} />
         </ReferenceInput>
@@ -39,6 +40,11 @@ export const AdresseCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectInput optionText={InformationPostaleTitle} />
         </ReferenceInput>
+        <TextInput
+          label="Localisation Initiale"
+          source="localisationInitiale"
+        />
+        <TextInput label="Localisation precise" source="localisationPrecise" />
       </SimpleForm>
     </Create>
   );

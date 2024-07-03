@@ -26,6 +26,9 @@ import { Utilisateur } from "./Utilisateur";
 import { UtilisateurFindManyArgs } from "./UtilisateurFindManyArgs";
 import { UtilisateurWhereUniqueInput } from "./UtilisateurWhereUniqueInput";
 import { UtilisateurUpdateInput } from "./UtilisateurUpdateInput";
+import { StructureFindManyArgs } from "../../structure/base/StructureFindManyArgs";
+import { Structure } from "../../structure/base/Structure";
+import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -49,13 +52,7 @@ export class UtilisateurControllerBase {
     @common.Body() data: UtilisateurCreateInput
   ): Promise<Utilisateur> {
     return await this.service.createUtilisateur({
-      data: {
-        ...data,
-
-        perimetre: {
-          connect: data.perimetre,
-        },
-      },
+      data: data,
       select: {
         civilite: true,
         createdAt: true,
@@ -63,15 +60,7 @@ export class UtilisateurControllerBase {
         dateDesactivation: true,
         email: true,
         id: true,
-        mssEmail: true,
         nom: true,
-
-        perimetre: {
-          select: {
-            id: true,
-          },
-        },
-
         prenom: true,
         roles: true,
         updatedAt: true,
@@ -103,15 +92,7 @@ export class UtilisateurControllerBase {
         dateDesactivation: true,
         email: true,
         id: true,
-        mssEmail: true,
         nom: true,
-
-        perimetre: {
-          select: {
-            id: true,
-          },
-        },
-
         prenom: true,
         roles: true,
         updatedAt: true,
@@ -144,15 +125,7 @@ export class UtilisateurControllerBase {
         dateDesactivation: true,
         email: true,
         id: true,
-        mssEmail: true,
         nom: true,
-
-        perimetre: {
-          select: {
-            id: true,
-          },
-        },
-
         prenom: true,
         roles: true,
         updatedAt: true,
@@ -186,13 +159,7 @@ export class UtilisateurControllerBase {
     try {
       return await this.service.updateUtilisateur({
         where: params,
-        data: {
-          ...data,
-
-          perimetre: {
-            connect: data.perimetre,
-          },
-        },
+        data: data,
         select: {
           civilite: true,
           createdAt: true,
@@ -200,15 +167,7 @@ export class UtilisateurControllerBase {
           dateDesactivation: true,
           email: true,
           id: true,
-          mssEmail: true,
           nom: true,
-
-          perimetre: {
-            select: {
-              id: true,
-            },
-          },
-
           prenom: true,
           roles: true,
           updatedAt: true,
@@ -249,15 +208,7 @@ export class UtilisateurControllerBase {
           dateDesactivation: true,
           email: true,
           id: true,
-          mssEmail: true,
           nom: true,
-
-          perimetre: {
-            select: {
-              id: true,
-            },
-          },
-
           prenom: true,
           roles: true,
           updatedAt: true,
@@ -272,5 +223,114 @@ export class UtilisateurControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/structures")
+  @ApiNestedQuery(StructureFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Structure",
+    action: "read",
+    possession: "any",
+  })
+  async findStructures(
+    @common.Req() request: Request,
+    @common.Param() params: UtilisateurWhereUniqueInput
+  ): Promise<Structure[]> {
+    const query = plainToClass(StructureFindManyArgs, request.query);
+    const results = await this.service.findStructures(params.id, {
+      ...query,
+      select: {
+        affectationDomaine: {
+          select: {
+            id: true,
+          },
+        },
+
+        code: true,
+        createdAt: true,
+        id: true,
+        typeField: true,
+        updatedAt: true,
+
+        utilisateur: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/structures")
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "update",
+    possession: "any",
+  })
+  async connectStructures(
+    @common.Param() params: UtilisateurWhereUniqueInput,
+    @common.Body() body: StructureWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      structures: {
+        connect: body,
+      },
+    };
+    await this.service.updateUtilisateur({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/structures")
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "update",
+    possession: "any",
+  })
+  async updateStructures(
+    @common.Param() params: UtilisateurWhereUniqueInput,
+    @common.Body() body: StructureWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      structures: {
+        set: body,
+      },
+    };
+    await this.service.updateUtilisateur({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/structures")
+  @nestAccessControl.UseRoles({
+    resource: "Utilisateur",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectStructures(
+    @common.Param() params: UtilisateurWhereUniqueInput,
+    @common.Body() body: StructureWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      structures: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateUtilisateur({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsOptional, ValidateNested } from "class-validator";
+import { IsDate, IsOptional, ValidateNested, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
 import { InformationPostaleWhereUniqueInput } from "../../informationPostale/base/InformationPostaleWhereUniqueInput";
@@ -75,6 +75,28 @@ class AdresseUpdateInput {
     nullable: true,
   })
   informationPostale?: InformationPostaleWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  localisationInitiale?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  localisationPrecise?: string | null;
 }
 
 export { AdresseUpdateInput as AdresseUpdateInput };

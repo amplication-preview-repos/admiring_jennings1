@@ -26,7 +26,8 @@ import { UtilisateurFindUniqueArgs } from "./UtilisateurFindUniqueArgs";
 import { CreateUtilisateurArgs } from "./CreateUtilisateurArgs";
 import { UpdateUtilisateurArgs } from "./UpdateUtilisateurArgs";
 import { DeleteUtilisateurArgs } from "./DeleteUtilisateurArgs";
-import { Perimetre } from "../../perimetre/base/Perimetre";
+import { StructureFindManyArgs } from "../../structure/base/StructureFindManyArgs";
+import { Structure } from "../../structure/base/Structure";
 import { UtilisateurService } from "../utilisateur.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Utilisateur)
@@ -93,13 +94,7 @@ export class UtilisateurResolverBase {
   ): Promise<Utilisateur> {
     return await this.service.createUtilisateur({
       ...args,
-      data: {
-        ...args.data,
-
-        perimetre: {
-          connect: args.data.perimetre,
-        },
-      },
+      data: args.data,
     });
   }
 
@@ -116,13 +111,7 @@ export class UtilisateurResolverBase {
     try {
       return await this.service.updateUtilisateur({
         ...args,
-        data: {
-          ...args.data,
-
-          perimetre: {
-            connect: args.data.perimetre,
-          },
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -156,23 +145,22 @@ export class UtilisateurResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Perimetre, {
-    nullable: true,
-    name: "perimetre",
-  })
+  @graphql.ResolveField(() => [Structure], { name: "structures" })
   @nestAccessControl.UseRoles({
-    resource: "Perimetre",
+    resource: "Structure",
     action: "read",
     possession: "any",
   })
-  async getPerimetre(
-    @graphql.Parent() parent: Utilisateur
-  ): Promise<Perimetre | null> {
-    const result = await this.service.getPerimetre(parent.id);
+  async findStructures(
+    @graphql.Parent() parent: Utilisateur,
+    @graphql.Args() args: StructureFindManyArgs
+  ): Promise<Structure[]> {
+    const results = await this.service.findStructures(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 }

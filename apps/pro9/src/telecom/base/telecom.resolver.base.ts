@@ -24,9 +24,10 @@ import { TelecomCountArgs } from "./TelecomCountArgs";
 import { TelecomFindManyArgs } from "./TelecomFindManyArgs";
 import { TelecomFindUniqueArgs } from "./TelecomFindUniqueArgs";
 import { CreateTelecomArgs } from "./CreateTelecomArgs";
-import { Salarie } from "../../salarie/base/Salarie";
 import { UpdateTelecomArgs } from "./UpdateTelecomArgs";
 import { DeleteTelecomArgs } from "./DeleteTelecomArgs";
+import { SalarieFindManyArgs } from "../../salarie/base/SalarieFindManyArgs";
+import { Salarie } from "../../salarie/base/Salarie";
 import { TelecomService } from "../telecom.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Telecom)
@@ -93,13 +94,7 @@ export class TelecomResolverBase {
   ): Promise<Telecom> {
     return await this.service.createTelecom({
       ...args,
-      data: {
-        ...args.data,
-
-        Salarie: {
-          connect: args.data.Salarie,
-        },
-      },
+      data: args.data,
     });
   }
 
@@ -116,13 +111,7 @@ export class TelecomResolverBase {
     try {
       return await this.service.updateTelecom({
         ...args,
-        data: {
-          ...args.data,
-
-          Salarie: {
-            connect: args.data.Salarie,
-          },
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -156,21 +145,22 @@ export class TelecomResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Salarie, {
-    nullable: true,
-    name: "salarie",
-  })
+  @graphql.ResolveField(() => [Salarie], { name: "salarie" })
   @nestAccessControl.UseRoles({
     resource: "Salarie",
     action: "read",
     possession: "any",
   })
-  async getSalarie(@graphql.Parent() parent: Telecom): Promise<Salarie | null> {
-    const result = await this.service.getSalarie(parent.id);
+  async findSalarie(
+    @graphql.Parent() parent: Telecom,
+    @graphql.Args() args: SalarieFindManyArgs
+  ): Promise<Salarie[]> {
+    const results = await this.service.findSalarie(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 }

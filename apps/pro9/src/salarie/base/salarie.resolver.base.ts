@@ -26,6 +26,7 @@ import { SalarieFindUniqueArgs } from "./SalarieFindUniqueArgs";
 import { CreateSalarieArgs } from "./CreateSalarieArgs";
 import { UpdateSalarieArgs } from "./UpdateSalarieArgs";
 import { DeleteSalarieArgs } from "./DeleteSalarieArgs";
+import { AffectationFindManyArgs } from "../../affectation/base/AffectationFindManyArgs";
 import { Affectation } from "../../affectation/base/Affectation";
 import { Adresse } from "../../adresse/base/Adresse";
 import { Identite } from "../../identite/base/Identite";
@@ -99,10 +100,6 @@ export class SalarieResolverBase {
       data: {
         ...args.data,
 
-        affectations: {
-          connect: args.data.affectations,
-        },
-
         demenegament: {
           connect: args.data.demenegament,
         },
@@ -139,10 +136,6 @@ export class SalarieResolverBase {
         ...args,
         data: {
           ...args.data,
-
-          affectations: {
-            connect: args.data.affectations,
-          },
 
           demenegament: {
             connect: args.data.demenegament,
@@ -195,24 +188,23 @@ export class SalarieResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Affectation, {
-    nullable: true,
-    name: "affectations",
-  })
+  @graphql.ResolveField(() => [Affectation], { name: "affectations" })
   @nestAccessControl.UseRoles({
     resource: "Affectation",
     action: "read",
     possession: "any",
   })
-  async getAffectations(
-    @graphql.Parent() parent: Salarie
-  ): Promise<Affectation | null> {
-    const result = await this.service.getAffectations(parent.id);
+  async findAffectations(
+    @graphql.Parent() parent: Salarie,
+    @graphql.Args() args: AffectationFindManyArgs
+  ): Promise<Affectation[]> {
+    const results = await this.service.findAffectations(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

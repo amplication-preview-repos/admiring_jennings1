@@ -18,7 +18,6 @@ import { Type } from "class-transformer";
 import { DateTimeFilter } from "../../util/DateTimeFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { EnumIdentiteNationalite } from "./EnumIdentiteNationalite";
-import { JsonFilter } from "../../util/JsonFilter";
 import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
 import { EnumIdentiteSexe } from "./EnumIdentiteSexe";
 
@@ -136,14 +135,14 @@ class IdentiteWhereInput {
 
   @ApiProperty({
     required: false,
-    type: JsonFilter,
+    type: StringFilter,
   })
-  @Type(() => JsonFilter)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => JsonFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  paysDeNaissance?: JsonFilter;
+  paysDeNaissance?: StringFilter;
 
   @ApiProperty({
     required: false,

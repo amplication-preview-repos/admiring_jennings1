@@ -93,6 +93,8 @@ export class AdresseControllerBase {
           },
         },
 
+        localisationInitiale: true,
+        localisationPrecise: true,
         updatedAt: true,
       },
     });
@@ -139,6 +141,8 @@ export class AdresseControllerBase {
           },
         },
 
+        localisationInitiale: true,
+        localisationPrecise: true,
         updatedAt: true,
       },
     });
@@ -186,6 +190,8 @@ export class AdresseControllerBase {
           },
         },
 
+        localisationInitiale: true,
+        localisationPrecise: true,
         updatedAt: true,
       },
     });
@@ -260,6 +266,8 @@ export class AdresseControllerBase {
             },
           },
 
+          localisationInitiale: true,
+          localisationPrecise: true,
           updatedAt: true,
         },
       });
@@ -315,6 +323,8 @@ export class AdresseControllerBase {
             },
           },
 
+          localisationInitiale: true,
+          localisationPrecise: true,
           updatedAt: true,
         },
       });

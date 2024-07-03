@@ -45,12 +45,15 @@ export class SalarieServiceBase {
     return this.prisma.salarie.delete(args);
   }
 
-  async getAffectations(parentId: string): Promise<PrismaAffectation | null> {
+  async findAffectations(
+    parentId: string,
+    args: Prisma.AffectationFindManyArgs
+  ): Promise<PrismaAffectation[]> {
     return this.prisma.salarie
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .affectations();
+      .affectations(args);
   }
 
   async getDemenegament(parentId: string): Promise<PrismaAdresse | null> {

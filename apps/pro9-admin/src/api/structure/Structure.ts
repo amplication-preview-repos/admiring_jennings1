@@ -1,13 +1,13 @@
 import { Affectation } from "../affectation/Affectation";
-import { Perimetre } from "../perimetre/Perimetre";
+import { Utilisateur } from "../utilisateur/Utilisateur";
 
 export type Structure = {
   affectationDomaine?: Affectation | null;
   affectations?: Array<Affectation>;
+  code: string;
   createdAt: Date;
   id: string;
-  libell: string;
-  perimetre?: Perimetre | null;
   typeField?: "Agence" | "Association" | "Federation" | null;
   updatedAt: Date;
+  utilisateur?: Utilisateur | null;
 };

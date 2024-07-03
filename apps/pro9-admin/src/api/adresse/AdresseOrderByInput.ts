@@ -8,5 +8,7 @@ export type AdresseOrderByInput = {
   finValidite?: SortOrder;
   id?: SortOrder;
   informationPostaleId?: SortOrder;
+  localisationInitiale?: SortOrder;
+  localisationPrecise?: SortOrder;
   updatedAt?: SortOrder;
 };

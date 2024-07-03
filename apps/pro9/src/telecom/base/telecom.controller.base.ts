@@ -22,11 +22,13 @@ import { TelecomService } from "../telecom.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { TelecomCreateInput } from "./TelecomCreateInput";
-import { Salarie } from "../../salarie/base/Salarie";
 import { Telecom } from "./Telecom";
 import { TelecomFindManyArgs } from "./TelecomFindManyArgs";
 import { TelecomWhereUniqueInput } from "./TelecomWhereUniqueInput";
 import { TelecomUpdateInput } from "./TelecomUpdateInput";
+import { SalarieFindManyArgs } from "../../salarie/base/SalarieFindManyArgs";
+import { Salarie } from "../../salarie/base/Salarie";
+import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -50,23 +52,10 @@ export class TelecomControllerBase {
     @common.Body() data: TelecomCreateInput
   ): Promise<Telecom> {
     return await this.service.createTelecom({
-      data: {
-        ...data,
-
-        Salarie: {
-          connect: data.Salarie,
-        },
-      },
+      data: data,
       select: {
         createdAt: true,
         id: true,
-
-        Salarie: {
-          select: {
-            id: true,
-          },
-        },
-
         typeMoyen: true,
         updatedAt: true,
         valeurMoyen: true,
@@ -93,13 +82,6 @@ export class TelecomControllerBase {
       select: {
         createdAt: true,
         id: true,
-
-        Salarie: {
-          select: {
-            id: true,
-          },
-        },
-
         typeMoyen: true,
         updatedAt: true,
         valeurMoyen: true,
@@ -127,13 +109,6 @@ export class TelecomControllerBase {
       select: {
         createdAt: true,
         id: true,
-
-        Salarie: {
-          select: {
-            id: true,
-          },
-        },
-
         typeMoyen: true,
         updatedAt: true,
         valeurMoyen: true,
@@ -166,23 +141,10 @@ export class TelecomControllerBase {
     try {
       return await this.service.updateTelecom({
         where: params,
-        data: {
-          ...data,
-
-          Salarie: {
-            connect: data.Salarie,
-          },
-        },
+        data: data,
         select: {
           createdAt: true,
           id: true,
-
-          Salarie: {
-            select: {
-              id: true,
-            },
-          },
-
           typeMoyen: true,
           updatedAt: true,
           valeurMoyen: true,
@@ -218,13 +180,6 @@ export class TelecomControllerBase {
         select: {
           createdAt: true,
           id: true,
-
-          Salarie: {
-            select: {
-              id: true,
-            },
-          },
-
           typeMoyen: true,
           updatedAt: true,
           valeurMoyen: true,
@@ -238,5 +193,129 @@ export class TelecomControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/Salarie")
+  @ApiNestedQuery(SalarieFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "read",
+    possession: "any",
+  })
+  async findSalarie(
+    @common.Req() request: Request,
+    @common.Param() params: TelecomWhereUniqueInput
+  ): Promise<Salarie[]> {
+    const query = plainToClass(SalarieFindManyArgs, request.query);
+    const results = await this.service.findSalarie(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+
+        demenegament: {
+          select: {
+            id: true,
+          },
+        },
+
+        domiciliation: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+
+        identite: {
+          select: {
+            id: true,
+          },
+        },
+
+        statutAdmr: true,
+        statutVip: true,
+
+        telecom: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/Salarie")
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "update",
+    possession: "any",
+  })
+  async connectSalarie(
+    @common.Param() params: TelecomWhereUniqueInput,
+    @common.Body() body: SalarieWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      Salarie: {
+        connect: body,
+      },
+    };
+    await this.service.updateTelecom({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/Salarie")
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "update",
+    possession: "any",
+  })
+  async updateSalarie(
+    @common.Param() params: TelecomWhereUniqueInput,
+    @common.Body() body: SalarieWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      Salarie: {
+        set: body,
+      },
+    };
+    await this.service.updateTelecom({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/Salarie")
+  @nestAccessControl.UseRoles({
+    resource: "Telecom",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectSalarie(
+    @common.Param() params: TelecomWhereUniqueInput,
+    @common.Body() body: SalarieWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      Salarie: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateTelecom({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

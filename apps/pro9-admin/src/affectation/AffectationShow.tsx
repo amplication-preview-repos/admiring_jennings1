@@ -24,7 +24,7 @@ export const AffectationShow = (props: ShowProps): React.ReactElement => {
           <TextField source={STRUCTURE_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="ID" source="id" />
-        <ReferenceField label="Salarié" source="salarie.id" reference="Salarie">
+        <ReferenceField label="Salarie" source="salarie.id" reference="Salarie">
           <TextField source={SALARIE_TITLE_FIELD} />
         </ReferenceField>
         <ReferenceField

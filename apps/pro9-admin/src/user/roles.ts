@@ -4,20 +4,20 @@ export const ROLES = [
     displayName: "Admin central",
   },
   {
-    name: "adminFDRal",
-    displayName: "Admin fédéral",
+    name: "adminFederal",
+    displayName: "Admin federal",
   },
   {
-    name: "lim",
-    displayName: "Limité",
+    name: "Etendu",
+    displayName: "etendu",
+  },
+  {
+    name: "limite",
+    displayName: "Limite",
   },
   {
     name: "standard",
     displayName: "Standard",
-  },
-  {
-    name: "tendu",
-    displayName: "Étendu",
   },
   {
     name: "Utilisateur",

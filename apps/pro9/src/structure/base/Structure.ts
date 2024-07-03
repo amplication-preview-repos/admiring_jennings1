@@ -15,14 +15,14 @@ import { Affectation } from "../../affectation/base/Affectation";
 import {
   ValidateNested,
   IsOptional,
-  IsDate,
   IsString,
   MaxLength,
+  IsDate,
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Perimetre } from "../../perimetre/base/Perimetre";
 import { EnumStructureTypeField } from "./EnumStructureTypeField";
+import { Utilisateur } from "../../utilisateur/base/Utilisateur";
 
 @ObjectType()
 class Structure {
@@ -46,6 +46,15 @@ class Structure {
 
   @ApiProperty({
     required: true,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @Field(() => String)
+  code!: string;
+
+  @ApiProperty({
+    required: true,
   })
   @IsDate()
   @Type(() => Date)
@@ -59,23 +68,6 @@ class Structure {
   @IsString()
   @Field(() => String)
   id!: string;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @Field(() => String)
-  libell!: string;
-
-  @ApiProperty({
-    required: true,
-    type: () => Perimetre,
-  })
-  @ValidateNested()
-  @Type(() => Perimetre)
-  perimetre?: Perimetre | null;
 
   @ApiProperty({
     required: false,
@@ -95,6 +87,15 @@ class Structure {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => Utilisateur,
+  })
+  @ValidateNested()
+  @Type(() => Utilisateur)
+  @IsOptional()
+  utilisateur?: Utilisateur | null;
 }
 
 export { Structure as Structure };

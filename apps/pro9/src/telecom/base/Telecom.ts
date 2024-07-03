@@ -11,7 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, MaxLength } from "class-validator";
+import {
+  IsDate,
+  IsString,
+  ValidateNested,
+  IsOptional,
+  MaxLength,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Salarie } from "../../salarie/base/Salarie";
 import { IsJSONValue } from "../../validators";
@@ -38,11 +44,12 @@ class Telecom {
 
   @ApiProperty({
     required: true,
-    type: () => Salarie,
+    type: () => [Salarie],
   })
   @ValidateNested()
   @Type(() => Salarie)
-  Salarie?: Salarie | null;
+  @IsOptional()
+  Salarie?: Array<Salarie>;
 
   @ApiProperty({
     required: true,

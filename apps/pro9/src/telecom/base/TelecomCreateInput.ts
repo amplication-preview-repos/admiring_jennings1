@@ -11,8 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
-import { ValidateNested, IsString, MaxLength } from "class-validator";
+import { SalarieCreateNestedManyWithoutTelecomsInput } from "./SalarieCreateNestedManyWithoutTelecomsInput";
+import {
+  ValidateNested,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Salarie } from "../../salarie/base/Salarie";
 import { IsJSONValue } from "../../validators";
@@ -23,12 +28,15 @@ import { InputJsonValue } from "../../types";
 class TelecomCreateInput {
   @ApiProperty({
     required: true,
-    type: () => SalarieWhereUniqueInput,
+    type: () => SalarieCreateNestedManyWithoutTelecomsInput,
   })
   @ValidateNested()
-  @Type(() => SalarieWhereUniqueInput)
-  @Field(() => SalarieWhereUniqueInput)
-  Salarie!: SalarieWhereUniqueInput | null;
+  @Type(() => SalarieCreateNestedManyWithoutTelecomsInput)
+  @IsOptional()
+  @Field(() => SalarieCreateNestedManyWithoutTelecomsInput, {
+    nullable: true,
+  })
+  Salarie?: SalarieCreateNestedManyWithoutTelecomsInput;
 
   @ApiProperty({
     required: true,

@@ -3,6 +3,7 @@ import { SalarieWhereUniqueInput } from "../salarie/SalarieWhereUniqueInput";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { InformationPostaleWhereUniqueInput } from "../informationPostale/InformationPostaleWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 export type AdresseWhereInput = {
   debutValidite?: DateTimeFilter;
@@ -11,4 +12,6 @@ export type AdresseWhereInput = {
   finValidite?: DateTimeNullableFilter;
   id?: StringFilter;
   informationPostale?: InformationPostaleWhereUniqueInput;
+  localisationInitiale?: StringNullableFilter;
+  localisationPrecise?: StringNullableFilter;
 };

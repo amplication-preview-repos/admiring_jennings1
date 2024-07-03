@@ -14,10 +14,10 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Affectation } from "../../affectation/base/Affectation";
 import {
   ValidateNested,
+  IsOptional,
   IsDate,
   IsString,
   IsBoolean,
-  IsOptional,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Adresse } from "../../adresse/base/Adresse";
@@ -28,11 +28,12 @@ import { Telecom } from "../../telecom/base/Telecom";
 class Salarie {
   @ApiProperty({
     required: true,
-    type: () => Affectation,
+    type: () => [Affectation],
   })
   @ValidateNested()
   @Type(() => Affectation)
-  affectations?: Affectation;
+  @IsOptional()
+  affectations?: Array<Affectation>;
 
   @ApiProperty({
     required: true,

@@ -19,10 +19,10 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { StructureCreateNestedManyWithoutUtilisateursInput } from "./StructureCreateNestedManyWithoutUtilisateursInput";
 
 @InputType()
 class UtilisateurCreateInput {
@@ -76,17 +76,6 @@ class UtilisateurCreateInput {
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  mssEmail?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
   @MaxLength(1000)
   @IsOptional()
   @Field(() => String, {
@@ -106,15 +95,6 @@ class UtilisateurCreateInput {
   password?: string | null;
 
   @ApiProperty({
-    required: true,
-    type: () => PerimetreWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => PerimetreWhereUniqueInput)
-  @Field(() => PerimetreWhereUniqueInput)
-  perimetre!: PerimetreWhereUniqueInput;
-
-  @ApiProperty({
     required: false,
     type: String,
   })
@@ -132,6 +112,18 @@ class UtilisateurCreateInput {
   @IsJSONValue()
   @Field(() => GraphQLJSON)
   roles!: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => StructureCreateNestedManyWithoutUtilisateursInput,
+  })
+  @ValidateNested()
+  @Type(() => StructureCreateNestedManyWithoutUtilisateursInput)
+  @IsOptional()
+  @Field(() => StructureCreateNestedManyWithoutUtilisateursInput, {
+    nullable: true,
+  })
+  structures?: StructureCreateNestedManyWithoutUtilisateursInput;
 
   @ApiProperty({
     required: false,

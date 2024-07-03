@@ -1,4 +1,3 @@
-import { InputJsonValue } from "../../types";
 import { SalarieWhereUniqueInput } from "../salarie/SalarieWhereUniqueInput";
 
 export type IdentiteUpdateInput = {
@@ -11,7 +10,7 @@ export type IdentiteUpdateInput = {
   nomNaissance?: string;
   nomUsuel?: string;
   numeroInsee?: string | null;
-  paysDeNaissance?: InputJsonValue;
+  paysDeNaissance?: string;
   premierPrenom?: string;
   prenoms?: string;
   prenomUsuel?: string;

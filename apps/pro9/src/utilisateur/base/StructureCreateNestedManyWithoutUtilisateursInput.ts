@@ -10,18 +10,19 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
+import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
 
 @InputType()
-class PerimetreWhereUniqueInput {
-  @ApiProperty({
-    required: true,
-    type: String,
+class StructureCreateNestedManyWithoutUtilisateursInput {
+  @Field(() => [StructureWhereUniqueInput], {
+    nullable: true,
   })
-  @IsString()
-  @Field(() => String)
-  id!: string;
+  @ApiProperty({
+    required: false,
+    type: () => [StructureWhereUniqueInput],
+  })
+  connect?: Array<StructureWhereUniqueInput>;
 }
 
-export { PerimetreWhereUniqueInput as PerimetreWhereUniqueInput };
+export { StructureCreateNestedManyWithoutUtilisateursInput as StructureCreateNestedManyWithoutUtilisateursInput };

@@ -31,7 +31,7 @@ export const AffectationCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectInput optionText={StructureTitle} />
         </ReferenceInput>
-        <ReferenceInput source="salarie.id" reference="Salarie" label="Salarié">
+        <ReferenceInput source="salarie.id" reference="Salarie" label="Salarie">
           <SelectInput optionText={SalarieTitle} />
         </ReferenceInput>
         <ReferenceInput

@@ -1,7 +1,7 @@
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { PerimetreWhereUniqueInput } from "../perimetre/PerimetreWhereUniqueInput";
+import { StructureListRelationFilter } from "../structure/StructureListRelationFilter";
 
 export type UtilisateurWhereInput = {
   civilite?: StringNullableFilter;
@@ -9,9 +9,8 @@ export type UtilisateurWhereInput = {
   dateDesactivation?: DateTimeNullableFilter;
   email?: StringNullableFilter;
   id?: StringFilter;
-  mssEmail?: StringNullableFilter;
   nom?: StringNullableFilter;
-  perimetre?: PerimetreWhereUniqueInput;
   prenom?: StringNullableFilter;
+  structures?: StructureListRelationFilter;
   username?: StringNullableFilter;
 };

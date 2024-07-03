@@ -9,20 +9,20 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
+import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
-import { PerimetreWhereInput } from "./PerimetreWhereInput";
-import { Type } from "class-transformer";
 
-@ArgsType()
-class PerimetreCountArgs {
+@InputType()
+class SalarieCreateNestedManyWithoutTelecomsInput {
+  @Field(() => [SalarieWhereUniqueInput], {
+    nullable: true,
+  })
   @ApiProperty({
     required: false,
-    type: () => PerimetreWhereInput,
+    type: () => [SalarieWhereUniqueInput],
   })
-  @Field(() => PerimetreWhereInput, { nullable: true })
-  @Type(() => PerimetreWhereInput)
-  where?: PerimetreWhereInput;
+  connect?: Array<SalarieWhereUniqueInput>;
 }
 
-export { PerimetreCountArgs as PerimetreCountArgs };
+export { SalarieCreateNestedManyWithoutTelecomsInput as SalarieCreateNestedManyWithoutTelecomsInput };

@@ -19,7 +19,7 @@ model Identite {
   nomNaissance           String
   nomUsuel               String
   numeroInsee            String?
-  paysDeNaissance        Json?
+  paysDeNaissance        String
   premierPrenom          String
   prenoms                String
   prenomUsuel            String
@@ -29,11 +29,11 @@ model Identite {
 }
 
 model Telecom {
-  createdAt   DateTime @default(now())
-  id          String   @id @default(cuid())
-  Salarie     Salarie?
+  createdAt   DateTime  @default(now())
+  id          String    @id @default(cuid())
+  Salarie     Salarie[]
   typeMoyen   String
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime  @updatedAt
   valeurMoyen Json
 }
 
@@ -43,7 +43,8 @@ model Affectation {
   domaine     Structure               @relation(name: "affectationDomaine", fields: [domaineId], references: [id])
   domaineId   String                  @unique
   id          String                  @id @default(cuid())
-  salarie     Salarie?
+  salarie     Salarie?                @relation(fields: [salarieId], references: [id])
+  salarieId   String?
   structure   Structure               @relation(name: "AffectationsOnStructure", fields: [structureId], references: [id])
   structureId String
   updatedAt   DateTime                @updatedAt
@@ -51,29 +52,18 @@ model Affectation {
 
 model Utilisateur {
   civilite          String?
-  createdAt         DateTime  @default(now())
+  createdAt         DateTime    @default(now())
   dateActivation    DateTime?
   dateDesactivation DateTime?
   email             String?
-  id                String    @id @default(cuid())
-  mssEmail          String?
+  id                String      @id @default(cuid())
   nom               String?
   password          String?
-  perimetre         Perimetre @relation(fields: [perimetreId], references: [id])
-  perimetreId       String
   prenom            String?
   roles             Json
-  updatedAt         DateTime  @updatedAt
+  structures        Structure[]
+  updatedAt         DateTime    @updatedAt
   username          String?
-}
-
-model Perimetre {
-  createdAt    DateTime      @default(now())
-  id           String        @id @default(cuid())
-  structure    Structure     @relation(fields: [structureId], references: [id])
-  structureId  String        @unique
-  updatedAt    DateTime      @updatedAt
-  utilisateurs Utilisateur[]
 }
 
 model Adresse {
@@ -85,36 +75,38 @@ model Adresse {
   id                   String             @id @default(cuid())
   informationPostale   InformationPostale @relation(fields: [informationPostaleId], references: [id])
   informationPostaleId String             @unique
+  localisationInitiale String?
+  localisationPrecise  String?
   updatedAt            DateTime           @updatedAt
 }
 
 model Structure {
   affectationDomaine Affectation?            @relation(name: "affectationDomaine")
   affectations       Affectation[]           @relation(name: "AffectationsOnStructure")
+  code               String
   createdAt          DateTime                @default(now())
   id                 String                  @id @default(cuid())
-  libell             String
-  perimetre          Perimetre?
   typeField          EnumStructureTypeField?
   updatedAt          DateTime                @updatedAt
+  utilisateur        Utilisateur?            @relation(fields: [utilisateurId], references: [id])
+  utilisateurId      String?
 }
 
 model Salarie {
-  affectations    Affectation @relation(fields: [affectation], references: [id])
-  affectation     String      @unique
-  createdAt       DateTime    @default(now())
-  demenegament    Adresse     @relation(name: "demanagementSalaries", fields: [demenagementId], references: [id])
-  demenagementId  String      @unique
-  domiciliation   Adresse     @relation(name: "DomiciliationSalarie", fields: [domiciliationId], references: [id])
-  domiciliationId String      @unique
-  id              String      @id @default(cuid())
-  identite        Identite    @relation(fields: [identiteId], references: [id])
-  identiteId      String      @unique
+  affectations    Affectation[]
+  createdAt       DateTime      @default(now())
+  demenegament    Adresse       @relation(name: "demanagementSalaries", fields: [demenagementId], references: [id])
+  demenagementId  String        @unique
+  domiciliation   Adresse       @relation(name: "DomiciliationSalarie", fields: [domiciliationId], references: [id])
+  domiciliationId String        @unique
+  id              String        @id @default(cuid())
+  identite        Identite      @relation(fields: [identiteId], references: [id])
+  identiteId      String        @unique
   statutAdmr      Boolean
   statutVip       Boolean
-  telecom         Telecom?    @relation(fields: [telecomId], references: [id])
-  telecomId       String?     @unique
-  updatedAt       DateTime    @updatedAt
+  telecom         Telecom?      @relation(fields: [telecomId], references: [id])
+  telecomId       String?
+  updatedAt       DateTime      @updatedAt
 }
 
 model InformationPostale {

@@ -18,7 +18,7 @@ export const IdentiteCreate = (props: CreateProps): React.ReactElement => {
       <SimpleForm>
         <SelectInput
           source="civilite"
-          label="Civilité"
+          label="Civilite"
           choices={[
             { label: "Homme", value: "Homme" },
             { label: "Femme", value: "Femme" },
@@ -31,7 +31,7 @@ export const IdentiteCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="Commune de naissance" source="communeDeNaissance" />
         <DateTimeInput label="Date de naissance" source="dateNaissance" />
         <TextInput
-          label="Département de naissance"
+          label="Departement de naissance"
           source="departementDeNaissance"
         />
         <SelectInput
@@ -46,12 +46,12 @@ export const IdentiteCreate = (props: CreateProps): React.ReactElement => {
         />
         <TextInput label="Nom de naissance" source="nomNaissance" />
         <TextInput label="Nom usuel" source="nomUsuel" />
-        <TextInput label="Numéro INSEE" source="numeroInsee" />
-        <div />
-        <TextInput label="Premier prénom" source="premierPrenom" />
-        <TextInput label="Prénoms" source="prenoms" />
+        <TextInput label="Numero INSEE" source="numeroInsee" />
+        <TextInput label="Pays de naissance" source="paysDeNaissance" />
+        <TextInput label="Premier prenom" source="premierPrenom" />
+        <TextInput label="Prenoms" source="prenoms" />
         <TextInput label="Prénom usuel" source="prenomUsuel" />
-        <ReferenceInput source="salarie.id" reference="Salarie" label="Salarié">
+        <ReferenceInput source="salarie.id" reference="Salarie" label="Salarie">
           <SelectInput optionText={SalarieTitle} />
         </ReferenceInput>
         <SelectInput

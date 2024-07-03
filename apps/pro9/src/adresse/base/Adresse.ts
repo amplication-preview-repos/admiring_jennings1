@@ -80,6 +80,28 @@ class Adresse {
   informationPostale?: InformationPostale;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  localisationInitiale!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  localisationPrecise!: string | null;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()

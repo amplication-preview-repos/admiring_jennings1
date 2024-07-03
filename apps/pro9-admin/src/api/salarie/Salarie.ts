@@ -4,7 +4,7 @@ import { Identite } from "../identite/Identite";
 import { Telecom } from "../telecom/Telecom";
 
 export type Salarie = {
-  affectations?: Affectation;
+  affectations?: Array<Affectation>;
   createdAt: Date;
   demenegament?: Adresse;
   domiciliation?: Adresse;

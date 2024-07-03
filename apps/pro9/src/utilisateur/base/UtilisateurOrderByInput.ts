@@ -94,17 +94,6 @@ class UtilisateurOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  mssEmail?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   nom?: SortOrder;
 
   @ApiProperty({
@@ -117,17 +106,6 @@ class UtilisateurOrderByInput {
     nullable: true,
   })
   password?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  perimetreId?: SortOrder;
 
   @ApiProperty({
     required: false,

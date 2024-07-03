@@ -14,7 +14,7 @@ import {
 import { STRUCTURE_TITLE_FIELD } from "./StructureTitle";
 import { SALARIE_TITLE_FIELD } from "../salarie/SalarieTitle";
 import { AFFECTATION_TITLE_FIELD } from "../affectation/AffectationTitle";
-import { PERIMETRE_TITLE_FIELD } from "../perimetre/PerimetreTitle";
+import { UTILISATEUR_TITLE_FIELD } from "../utilisateur/UtilisateurTitle";
 
 export const StructureShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -27,18 +27,18 @@ export const StructureShow = (props: ShowProps): React.ReactElement => {
         >
           <TextField source={AFFECTATION_TITLE_FIELD} />
         </ReferenceField>
+        <TextField label="Code" source="code" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
-        <TextField label="Libellé" source="libell" />
-        <ReferenceField
-          label="Périmètre"
-          source="perimetre.id"
-          reference="Perimetre"
-        >
-          <TextField source={PERIMETRE_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="Type" source="typeField" />
         <DateField source="updatedAt" label="Updated At" />
+        <ReferenceField
+          label="Utilisateur"
+          source="utilisateur.id"
+          reference="Utilisateur"
+        >
+          <TextField source={UTILISATEUR_TITLE_FIELD} />
+        </ReferenceField>
         <ReferenceManyField
           reference="Affectation"
           target="structureId"
@@ -56,7 +56,7 @@ export const StructureShow = (props: ShowProps): React.ReactElement => {
             </ReferenceField>
             <TextField label="ID" source="id" />
             <ReferenceField
-              label="Salarié"
+              label="Salarie"
               source="salarie.id"
               reference="Salarie"
             >

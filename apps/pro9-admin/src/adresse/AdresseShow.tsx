@@ -24,7 +24,7 @@ export const AdresseShow = (props: ShowProps): React.ReactElement => {
           <TextField source={SALARIE_TITLE_FIELD} />
         </ReferenceField>
         <ReferenceField
-          label="Domiciliation salarié"
+          label="Domiciliation salarie"
           source="salarie.id"
           reference="Salarie"
         >
@@ -39,6 +39,11 @@ export const AdresseShow = (props: ShowProps): React.ReactElement => {
         >
           <TextField source={INFORMATIONPOSTALE_TITLE_FIELD} />
         </ReferenceField>
+        <TextField
+          label="Localisation Initiale"
+          source="localisationInitiale"
+        />
+        <TextField label="Localisation precise" source="localisationPrecise" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

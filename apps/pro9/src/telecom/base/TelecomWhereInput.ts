@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { SalarieWhereUniqueInput } from "../../salarie/base/SalarieWhereUniqueInput";
+import { SalarieListRelationFilter } from "../../salarie/base/SalarieListRelationFilter";
 import { Salarie } from "../../salarie/base/Salarie";
 import { JsonFilter } from "../../util/JsonFilter";
 
@@ -33,15 +33,15 @@ class TelecomWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => SalarieWhereUniqueInput,
+    type: () => SalarieListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => SalarieWhereUniqueInput)
+  @Type(() => SalarieListRelationFilter)
   @IsOptional()
-  @Field(() => SalarieWhereUniqueInput, {
+  @Field(() => SalarieListRelationFilter, {
     nullable: true,
   })
-  Salarie?: SalarieWhereUniqueInput;
+  Salarie?: SalarieListRelationFilter;
 
   @ApiProperty({
     required: false,

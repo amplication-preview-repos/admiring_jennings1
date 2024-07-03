@@ -26,6 +26,9 @@ import { Salarie } from "./Salarie";
 import { SalarieFindManyArgs } from "./SalarieFindManyArgs";
 import { SalarieWhereUniqueInput } from "./SalarieWhereUniqueInput";
 import { SalarieUpdateInput } from "./SalarieUpdateInput";
+import { AffectationFindManyArgs } from "../../affectation/base/AffectationFindManyArgs";
+import { Affectation } from "../../affectation/base/Affectation";
+import { AffectationWhereUniqueInput } from "../../affectation/base/AffectationWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -52,10 +55,6 @@ export class SalarieControllerBase {
       data: {
         ...data,
 
-        affectations: {
-          connect: data.affectations,
-        },
-
         demenegament: {
           connect: data.demenegament,
         },
@@ -75,12 +74,6 @@ export class SalarieControllerBase {
           : undefined,
       },
       select: {
-        affectations: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
 
         demenegament: {
@@ -134,12 +127,6 @@ export class SalarieControllerBase {
     return this.service.salaries({
       ...args,
       select: {
-        affectations: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
 
         demenegament: {
@@ -194,12 +181,6 @@ export class SalarieControllerBase {
     const result = await this.service.salarie({
       where: params,
       select: {
-        affectations: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
 
         demenegament: {
@@ -264,10 +245,6 @@ export class SalarieControllerBase {
         data: {
           ...data,
 
-          affectations: {
-            connect: data.affectations,
-          },
-
           demenegament: {
             connect: data.demenegament,
           },
@@ -287,12 +264,6 @@ export class SalarieControllerBase {
             : undefined,
         },
         select: {
-          affectations: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
 
           demenegament: {
@@ -355,12 +326,6 @@ export class SalarieControllerBase {
       return await this.service.deleteSalarie({
         where: params,
         select: {
-          affectations: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
 
           demenegament: {
@@ -403,5 +368,121 @@ export class SalarieControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/affectations")
+  @ApiNestedQuery(AffectationFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Affectation",
+    action: "read",
+    possession: "any",
+  })
+  async findAffectations(
+    @common.Req() request: Request,
+    @common.Param() params: SalarieWhereUniqueInput
+  ): Promise<Affectation[]> {
+    const query = plainToClass(AffectationFindManyArgs, request.query);
+    const results = await this.service.findAffectations(params.id, {
+      ...query,
+      select: {
+        activite: true,
+        createdAt: true,
+
+        domaine: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+
+        salarie: {
+          select: {
+            id: true,
+          },
+        },
+
+        structure: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/affectations")
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "update",
+    possession: "any",
+  })
+  async connectAffectations(
+    @common.Param() params: SalarieWhereUniqueInput,
+    @common.Body() body: AffectationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      affectations: {
+        connect: body,
+      },
+    };
+    await this.service.updateSalarie({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/affectations")
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "update",
+    possession: "any",
+  })
+  async updateAffectations(
+    @common.Param() params: SalarieWhereUniqueInput,
+    @common.Body() body: AffectationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      affectations: {
+        set: body,
+      },
+    };
+    await this.service.updateSalarie({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/affectations")
+  @nestAccessControl.UseRoles({
+    resource: "Salarie",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectAffectations(
+    @common.Param() params: SalarieWhereUniqueInput,
+    @common.Body() body: AffectationWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      affectations: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateSalarie({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

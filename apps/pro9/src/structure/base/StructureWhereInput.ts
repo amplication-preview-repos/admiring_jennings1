@@ -16,8 +16,8 @@ import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
 import { AffectationListRelationFilter } from "../../affectation/base/AffectationListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
 import { EnumStructureTypeField } from "./EnumStructureTypeField";
+import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
 
 @InputType()
 class StructureWhereInput {
@@ -54,7 +54,7 @@ class StructureWhereInput {
   @Field(() => StringFilter, {
     nullable: true,
   })
-  id?: StringFilter;
+  code?: StringFilter;
 
   @ApiProperty({
     required: false,
@@ -65,19 +65,7 @@ class StructureWhereInput {
   @Field(() => StringFilter, {
     nullable: true,
   })
-  libell?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => PerimetreWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => PerimetreWhereUniqueInput)
-  @IsOptional()
-  @Field(() => PerimetreWhereUniqueInput, {
-    nullable: true,
-  })
-  perimetre?: PerimetreWhereUniqueInput;
+  id?: StringFilter;
 
   @ApiProperty({
     required: false,
@@ -89,6 +77,18 @@ class StructureWhereInput {
     nullable: true,
   })
   typeField?: "Agence" | "Association" | "Federation";
+
+  @ApiProperty({
+    required: false,
+    type: () => UtilisateurWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UtilisateurWhereUniqueInput)
+  @IsOptional()
+  @Field(() => UtilisateurWhereUniqueInput, {
+    nullable: true,
+  })
+  utilisateur?: UtilisateurWhereUniqueInput;
 }
 
 export { StructureWhereInput as StructureWhereInput };

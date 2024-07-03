@@ -21,8 +21,8 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { AffectationCreateNestedManyWithoutStructuresInput } from "./AffectationCreateNestedManyWithoutStructuresInput";
-import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
 import { EnumStructureTypeField } from "./EnumStructureTypeField";
+import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
 
 @InputType()
 class StructureCreateInput {
@@ -57,16 +57,7 @@ class StructureCreateInput {
   @IsString()
   @MaxLength(1000)
   @Field(() => String)
-  libell!: string;
-
-  @ApiProperty({
-    required: true,
-    type: () => PerimetreWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => PerimetreWhereUniqueInput)
-  @Field(() => PerimetreWhereUniqueInput)
-  perimetre!: PerimetreWhereUniqueInput | null;
+  code!: string;
 
   @ApiProperty({
     required: false,
@@ -78,6 +69,18 @@ class StructureCreateInput {
     nullable: true,
   })
   typeField?: "Agence" | "Association" | "Federation" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => UtilisateurWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UtilisateurWhereUniqueInput)
+  @IsOptional()
+  @Field(() => UtilisateurWhereUniqueInput, {
+    nullable: true,
+  })
+  utilisateur?: UtilisateurWhereUniqueInput | null;
 }
 
 export { StructureCreateInput as StructureCreateInput };

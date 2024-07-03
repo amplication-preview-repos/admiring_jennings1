@@ -22,9 +22,6 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumIdentiteNationalite } from "./EnumIdentiteNationalite";
-import { IsJSONValue } from "../../validators";
-import { GraphQLJSON } from "graphql-type-json";
-import { JsonValue } from "type-fest";
 import { Salarie } from "../../salarie/base/Salarie";
 import { EnumIdentiteSexe } from "./EnumIdentiteSexe";
 
@@ -136,14 +133,13 @@ class Identite {
   numeroInsee!: string | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
+    type: String,
   })
-  @IsJSONValue()
-  @IsOptional()
-  @Field(() => GraphQLJSON, {
-    nullable: true,
-  })
-  paysDeNaissance!: JsonValue;
+  @IsString()
+  @MaxLength(256)
+  @Field(() => String)
+  paysDeNaissance!: string;
 
   @ApiProperty({
     required: true,

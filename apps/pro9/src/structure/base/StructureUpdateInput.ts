@@ -21,8 +21,8 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { AffectationUpdateManyWithoutStructuresInput } from "./AffectationUpdateManyWithoutStructuresInput";
-import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
 import { EnumStructureTypeField } from "./EnumStructureTypeField";
+import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
 
 @InputType()
 class StructureUpdateInput {
@@ -60,19 +60,7 @@ class StructureUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  libell?: string;
-
-  @ApiProperty({
-    required: false,
-    type: () => PerimetreWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => PerimetreWhereUniqueInput)
-  @IsOptional()
-  @Field(() => PerimetreWhereUniqueInput, {
-    nullable: true,
-  })
-  perimetre?: PerimetreWhereUniqueInput | null;
+  code?: string;
 
   @ApiProperty({
     required: false,
@@ -84,6 +72,18 @@ class StructureUpdateInput {
     nullable: true,
   })
   typeField?: "Agence" | "Association" | "Federation" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => UtilisateurWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UtilisateurWhereUniqueInput)
+  @IsOptional()
+  @Field(() => UtilisateurWhereUniqueInput, {
+    nullable: true,
+  })
+  utilisateur?: UtilisateurWhereUniqueInput | null;
 }
 
 export { StructureUpdateInput as StructureUpdateInput };
