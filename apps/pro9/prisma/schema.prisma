@@ -51,40 +51,29 @@ model Affectation {
 
 model Utilisateur {
   civilite          String?
-  createdAt         DateTime      @default(now())
+  createdAt         DateTime  @default(now())
   dateActivation    DateTime?
   dateDesactivation DateTime?
   email             String?
-  habilitation      Habilitation? @relation(fields: [habilitationId], references: [id])
-  habilitationId    String?       @unique
-  id                String        @id @default(cuid())
+  id                String    @id @default(cuid())
   mssEmail          String?
   nom               String?
   password          String?
+  perimetre         Perimetre @relation(fields: [perimetreId], references: [id])
+  perimetreId       String
   prenom            String?
   roles             Json
-  updatedAt         DateTime      @updatedAt
+  updatedAt         DateTime  @updatedAt
   username          String?
 }
 
-model Habilitation {
-  createdAt             DateTime     @default(now())
-  gestionAdministration Boolean?
-  gestionUtilisateur    Boolean?
-  id                    String       @id @default(cuid())
-  perimetre             Perimetre    @relation(fields: [perimetreId], references: [id])
-  perimetreId           String       @unique
-  updatedAt             DateTime     @updatedAt
-  utilisateur           Utilisateur?
-}
-
 model Perimetre {
-  createdAt     DateTime       @default(now())
-  habilitations Habilitation[]
-  id            String         @id @default(cuid())
-  structure     Structure      @relation(fields: [structureId], references: [id])
-  structureId   String         @unique
-  updatedAt     DateTime       @updatedAt
+  createdAt    DateTime      @default(now())
+  id           String        @id @default(cuid())
+  structure    Structure     @relation(fields: [structureId], references: [id])
+  structureId  String        @unique
+  updatedAt    DateTime      @updatedAt
+  utilisateurs Utilisateur[]
 }
 
 model Adresse {

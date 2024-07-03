@@ -10,37 +10,37 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
-import { HabilitationWhereUniqueInput } from "../../habilitation/base/HabilitationWhereUniqueInput";
+import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class HabilitationUpdateManyWithoutPerimetresInput {
-  @Field(() => [HabilitationWhereUniqueInput], {
+class UtilisateurUpdateManyWithoutPerimetresInput {
+  @Field(() => [UtilisateurWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [HabilitationWhereUniqueInput],
+    type: () => [UtilisateurWhereUniqueInput],
   })
-  connect?: Array<HabilitationWhereUniqueInput>;
+  connect?: Array<UtilisateurWhereUniqueInput>;
 
-  @Field(() => [HabilitationWhereUniqueInput], {
+  @Field(() => [UtilisateurWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [HabilitationWhereUniqueInput],
+    type: () => [UtilisateurWhereUniqueInput],
   })
-  disconnect?: Array<HabilitationWhereUniqueInput>;
+  disconnect?: Array<UtilisateurWhereUniqueInput>;
 
-  @Field(() => [HabilitationWhereUniqueInput], {
+  @Field(() => [UtilisateurWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [HabilitationWhereUniqueInput],
+    type: () => [UtilisateurWhereUniqueInput],
   })
-  set?: Array<HabilitationWhereUniqueInput>;
+  set?: Array<UtilisateurWhereUniqueInput>;
 }
 
-export { HabilitationUpdateManyWithoutPerimetresInput as HabilitationUpdateManyWithoutPerimetresInput };
+export { UtilisateurUpdateManyWithoutPerimetresInput as UtilisateurUpdateManyWithoutPerimetresInput };

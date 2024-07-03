@@ -11,25 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { HabilitationCreateNestedManyWithoutPerimetresInput } from "./HabilitationCreateNestedManyWithoutPerimetresInput";
+import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
+import { UtilisateurCreateNestedManyWithoutPerimetresInput } from "./UtilisateurCreateNestedManyWithoutPerimetresInput";
 
 @InputType()
 class PerimetreCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => HabilitationCreateNestedManyWithoutPerimetresInput,
-  })
-  @ValidateNested()
-  @Type(() => HabilitationCreateNestedManyWithoutPerimetresInput)
-  @IsOptional()
-  @Field(() => HabilitationCreateNestedManyWithoutPerimetresInput, {
-    nullable: true,
-  })
-  habilitations?: HabilitationCreateNestedManyWithoutPerimetresInput;
-
   @ApiProperty({
     required: true,
     type: () => StructureWhereUniqueInput,
@@ -38,6 +26,18 @@ class PerimetreCreateInput {
   @Type(() => StructureWhereUniqueInput)
   @Field(() => StructureWhereUniqueInput)
   structure!: StructureWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => UtilisateurCreateNestedManyWithoutPerimetresInput,
+  })
+  @ValidateNested()
+  @Type(() => UtilisateurCreateNestedManyWithoutPerimetresInput)
+  @IsOptional()
+  @Field(() => UtilisateurCreateNestedManyWithoutPerimetresInput, {
+    nullable: true,
+  })
+  utilisateurs?: UtilisateurCreateNestedManyWithoutPerimetresInput;
 }
 
 export { PerimetreCreateInput as PerimetreCreateInput };

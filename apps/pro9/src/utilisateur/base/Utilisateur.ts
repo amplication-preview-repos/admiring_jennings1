@@ -19,7 +19,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Habilitation } from "../../habilitation/base/Habilitation";
+import { Perimetre } from "../../perimetre/base/Perimetre";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
@@ -80,15 +80,6 @@ class Utilisateur {
   email!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: () => Habilitation,
-  })
-  @ValidateNested()
-  @Type(() => Habilitation)
-  @IsOptional()
-  habilitation?: Habilitation | null;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
@@ -118,6 +109,14 @@ class Utilisateur {
     nullable: true,
   })
   nom!: string | null;
+
+  @ApiProperty({
+    required: true,
+    type: () => Perimetre,
+  })
+  @ValidateNested()
+  @Type(() => Perimetre)
+  perimetre?: Perimetre;
 
   @ApiProperty({
     required: false,

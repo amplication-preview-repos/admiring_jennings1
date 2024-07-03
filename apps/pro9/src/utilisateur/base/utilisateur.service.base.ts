@@ -10,13 +10,11 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-
 import {
   Prisma,
   Utilisateur as PrismaUtilisateur,
-  Habilitation as PrismaHabilitation,
+  Perimetre as PrismaPerimetre,
 } from "@prisma/client";
-
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
 
@@ -79,11 +77,11 @@ export class UtilisateurServiceBase {
     return this.prisma.utilisateur.delete(args);
   }
 
-  async getHabilitation(parentId: string): Promise<PrismaHabilitation | null> {
+  async getPerimetre(parentId: string): Promise<PrismaPerimetre | null> {
     return this.prisma.utilisateur
       .findUnique({
         where: { id: parentId },
       })
-      .habilitation();
+      .perimetre();
   }
 }

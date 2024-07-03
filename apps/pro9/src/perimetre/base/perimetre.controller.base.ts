@@ -26,9 +26,9 @@ import { Perimetre } from "./Perimetre";
 import { PerimetreFindManyArgs } from "./PerimetreFindManyArgs";
 import { PerimetreWhereUniqueInput } from "./PerimetreWhereUniqueInput";
 import { PerimetreUpdateInput } from "./PerimetreUpdateInput";
-import { HabilitationFindManyArgs } from "../../habilitation/base/HabilitationFindManyArgs";
-import { Habilitation } from "../../habilitation/base/Habilitation";
-import { HabilitationWhereUniqueInput } from "../../habilitation/base/HabilitationWhereUniqueInput";
+import { UtilisateurFindManyArgs } from "../../utilisateur/base/UtilisateurFindManyArgs";
+import { Utilisateur } from "../../utilisateur/base/Utilisateur";
+import { UtilisateurWhereUniqueInput } from "../../utilisateur/base/UtilisateurWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -233,25 +233,29 @@ export class PerimetreControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/habilitations")
-  @ApiNestedQuery(HabilitationFindManyArgs)
+  @common.Get("/:id/utilisateurs")
+  @ApiNestedQuery(UtilisateurFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Habilitation",
+    resource: "Utilisateur",
     action: "read",
     possession: "any",
   })
-  async findHabilitations(
+  async findUtilisateurs(
     @common.Req() request: Request,
     @common.Param() params: PerimetreWhereUniqueInput
-  ): Promise<Habilitation[]> {
-    const query = plainToClass(HabilitationFindManyArgs, request.query);
-    const results = await this.service.findHabilitations(params.id, {
+  ): Promise<Utilisateur[]> {
+    const query = plainToClass(UtilisateurFindManyArgs, request.query);
+    const results = await this.service.findUtilisateurs(params.id, {
       ...query,
       select: {
+        civilite: true,
         createdAt: true,
-        gestionAdministration: true,
-        gestionUtilisateur: true,
+        dateActivation: true,
+        dateDesactivation: true,
+        email: true,
         id: true,
+        mssEmail: true,
+        nom: true,
 
         perimetre: {
           select: {
@@ -259,13 +263,10 @@ export class PerimetreControllerBase {
           },
         },
 
+        prenom: true,
+        roles: true,
         updatedAt: true,
-
-        utilisateur: {
-          select: {
-            id: true,
-          },
-        },
+        username: true,
       },
     });
     if (results === null) {
@@ -276,18 +277,18 @@ export class PerimetreControllerBase {
     return results;
   }
 
-  @common.Post("/:id/habilitations")
+  @common.Post("/:id/utilisateurs")
   @nestAccessControl.UseRoles({
     resource: "Perimetre",
     action: "update",
     possession: "any",
   })
-  async connectHabilitations(
+  async connectUtilisateurs(
     @common.Param() params: PerimetreWhereUniqueInput,
-    @common.Body() body: HabilitationWhereUniqueInput[]
+    @common.Body() body: UtilisateurWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      habilitations: {
+      utilisateurs: {
         connect: body,
       },
     };
@@ -298,18 +299,18 @@ export class PerimetreControllerBase {
     });
   }
 
-  @common.Patch("/:id/habilitations")
+  @common.Patch("/:id/utilisateurs")
   @nestAccessControl.UseRoles({
     resource: "Perimetre",
     action: "update",
     possession: "any",
   })
-  async updateHabilitations(
+  async updateUtilisateurs(
     @common.Param() params: PerimetreWhereUniqueInput,
-    @common.Body() body: HabilitationWhereUniqueInput[]
+    @common.Body() body: UtilisateurWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      habilitations: {
+      utilisateurs: {
         set: body,
       },
     };
@@ -320,18 +321,18 @@ export class PerimetreControllerBase {
     });
   }
 
-  @common.Delete("/:id/habilitations")
+  @common.Delete("/:id/utilisateurs")
   @nestAccessControl.UseRoles({
     resource: "Perimetre",
     action: "update",
     possession: "any",
   })
-  async disconnectHabilitations(
+  async disconnectUtilisateurs(
     @common.Param() params: PerimetreWhereUniqueInput,
-    @common.Body() body: HabilitationWhereUniqueInput[]
+    @common.Body() body: UtilisateurWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      habilitations: {
+      utilisateurs: {
         disconnect: body,
       },
     };

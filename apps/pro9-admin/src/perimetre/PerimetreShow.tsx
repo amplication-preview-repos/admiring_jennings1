@@ -9,11 +9,9 @@ import {
   ReferenceField,
   ReferenceManyField,
   Datagrid,
-  BooleanField,
 } from "react-admin";
 
 import { PERIMETRE_TITLE_FIELD } from "./PerimetreTitle";
-import { UTILISATEUR_TITLE_FIELD } from "../utilisateur/UtilisateurTitle";
 import { STRUCTURE_TITLE_FIELD } from "../structure/StructureTitle";
 
 export const PerimetreShow = (props: ShowProps): React.ReactElement => {
@@ -31,36 +29,30 @@ export const PerimetreShow = (props: ShowProps): React.ReactElement => {
         </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
-          reference="Habilitation"
+          reference="Utilisateur"
           target="perimetreId"
-          label="Habilitations"
+          label="Utilisateurs"
         >
           <Datagrid rowClick="show">
+            <TextField label="civilite" source="civilite" />
             <DateField source="createdAt" label="Created At" />
-            <BooleanField
-              label="Gestion administratif"
-              source="gestionAdministration"
-            />
-            <BooleanField
-              label="Gestion utilisateur"
-              source="gestionUtilisateur"
-            />
+            <TextField label="dateActivation" source="dateActivation" />
+            <TextField label="dateDesactivation" source="dateDesactivation" />
+            <TextField label="email" source="email" />
             <TextField label="ID" source="id" />
+            <TextField label="mssEmail" source="mssEmail" />
+            <TextField label="nom" source="nom" />
             <ReferenceField
-              label="Périmètre"
+              label="perimetre"
               source="perimetre.id"
               reference="Perimetre"
             >
               <TextField source={PERIMETRE_TITLE_FIELD} />
             </ReferenceField>
+            <TextField label="prenom" source="prenom" />
+            <TextField label="roles" source="roles" />
             <DateField source="updatedAt" label="Updated At" />
-            <ReferenceField
-              label="Utilisateur"
-              source="utilisateur.id"
-              reference="Utilisateur"
-            >
-              <TextField source={UTILISATEUR_TITLE_FIELD} />
-            </ReferenceField>
+            <TextField label="username" source="username" />
           </Datagrid>
         </ReferenceManyField>
       </SimpleShowLayout>

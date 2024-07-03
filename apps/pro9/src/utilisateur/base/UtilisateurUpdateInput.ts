@@ -19,7 +19,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { HabilitationWhereUniqueInput } from "../../habilitation/base/HabilitationWhereUniqueInput";
+import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -73,18 +73,6 @@ class UtilisateurUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => HabilitationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => HabilitationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => HabilitationWhereUniqueInput, {
-    nullable: true,
-  })
-  habilitation?: HabilitationWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -116,6 +104,18 @@ class UtilisateurUpdateInput {
     nullable: true,
   })
   password?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => PerimetreWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => PerimetreWhereUniqueInput)
+  @IsOptional()
+  @Field(() => PerimetreWhereUniqueInput, {
+    nullable: true,
+  })
+  perimetre?: PerimetreWhereUniqueInput;
 
   @ApiProperty({
     required: false,

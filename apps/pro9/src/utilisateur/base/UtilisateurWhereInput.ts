@@ -15,8 +15,8 @@ import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { HabilitationWhereUniqueInput } from "../../habilitation/base/HabilitationWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
+import { PerimetreWhereUniqueInput } from "../../perimetre/base/PerimetreWhereUniqueInput";
 
 @InputType()
 class UtilisateurWhereInput {
@@ -66,18 +66,6 @@ class UtilisateurWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => HabilitationWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => HabilitationWhereUniqueInput)
-  @IsOptional()
-  @Field(() => HabilitationWhereUniqueInput, {
-    nullable: true,
-  })
-  habilitation?: HabilitationWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -108,6 +96,18 @@ class UtilisateurWhereInput {
     nullable: true,
   })
   nom?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => PerimetreWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => PerimetreWhereUniqueInput)
+  @IsOptional()
+  @Field(() => PerimetreWhereUniqueInput, {
+    nullable: true,
+  })
+  perimetre?: PerimetreWhereUniqueInput;
 
   @ApiProperty({
     required: false,

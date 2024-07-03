@@ -1,4 +1,4 @@
-import { HabilitationWhereUniqueInput } from "../habilitation/HabilitationWhereUniqueInput";
+import { PerimetreWhereUniqueInput } from "../perimetre/PerimetreWhereUniqueInput";
 import { InputJsonValue } from "../../types";
 
 export type UtilisateurUpdateInput = {
@@ -6,10 +6,10 @@ export type UtilisateurUpdateInput = {
   dateActivation?: Date | null;
   dateDesactivation?: Date | null;
   email?: string | null;
-  habilitation?: HabilitationWhereUniqueInput | null;
   mssEmail?: string | null;
   nom?: string | null;
   password?: string | null;
+  perimetre?: PerimetreWhereUniqueInput;
   prenom?: string | null;
   roles?: InputJsonValue;
   username?: string | null;

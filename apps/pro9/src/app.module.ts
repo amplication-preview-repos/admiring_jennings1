@@ -3,7 +3,6 @@ import { IdentiteModule } from "./identite/identite.module";
 import { TelecomModule } from "./telecom/telecom.module";
 import { AffectationModule } from "./affectation/affectation.module";
 import { UtilisateurModule } from "./utilisateur/utilisateur.module";
-import { HabilitationModule } from "./habilitation/habilitation.module";
 import { PerimetreModule } from "./perimetre/perimetre.module";
 import { AdresseModule } from "./adresse/adresse.module";
 import { StructureModule } from "./structure/structure.module";
@@ -30,7 +29,6 @@ import { AuthModule } from "./auth/auth.module";
     TelecomModule,
     AffectationModule,
     UtilisateurModule,
-    HabilitationModule,
     PerimetreModule,
     AdresseModule,
     StructureModule,

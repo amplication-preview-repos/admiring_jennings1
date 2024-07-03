@@ -11,10 +11,10 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, ValidateNested, IsOptional, IsString } from "class-validator";
+import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { Habilitation } from "../../habilitation/base/Habilitation";
 import { Structure } from "../../structure/base/Structure";
+import { Utilisateur } from "../../utilisateur/base/Utilisateur";
 
 @ObjectType()
 class Perimetre {
@@ -25,15 +25,6 @@ class Perimetre {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Habilitation],
-  })
-  @ValidateNested()
-  @Type(() => Habilitation)
-  @IsOptional()
-  habilitations?: Array<Habilitation>;
 
   @ApiProperty({
     required: true,
@@ -58,6 +49,15 @@ class Perimetre {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Utilisateur],
+  })
+  @ValidateNested()
+  @Type(() => Utilisateur)
+  @IsOptional()
+  utilisateurs?: Array<Utilisateur>;
 }
 
 export { Perimetre as Perimetre };

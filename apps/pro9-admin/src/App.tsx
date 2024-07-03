@@ -21,10 +21,6 @@ import { UtilisateurList } from "./utilisateur/UtilisateurList";
 import { UtilisateurCreate } from "./utilisateur/UtilisateurCreate";
 import { UtilisateurEdit } from "./utilisateur/UtilisateurEdit";
 import { UtilisateurShow } from "./utilisateur/UtilisateurShow";
-import { HabilitationList } from "./habilitation/HabilitationList";
-import { HabilitationCreate } from "./habilitation/HabilitationCreate";
-import { HabilitationEdit } from "./habilitation/HabilitationEdit";
-import { HabilitationShow } from "./habilitation/HabilitationShow";
 import { PerimetreList } from "./perimetre/PerimetreList";
 import { PerimetreCreate } from "./perimetre/PerimetreCreate";
 import { PerimetreEdit } from "./perimetre/PerimetreEdit";
@@ -98,13 +94,6 @@ const App = (): React.ReactElement => {
           edit={UtilisateurEdit}
           create={UtilisateurCreate}
           show={UtilisateurShow}
-        />
-        <Resource
-          name="Habilitation"
-          list={HabilitationList}
-          edit={HabilitationEdit}
-          create={HabilitationCreate}
-          show={HabilitationShow}
         />
         <Resource
           name="Perimetre"

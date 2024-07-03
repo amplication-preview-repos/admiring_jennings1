@@ -14,7 +14,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   Perimetre as PrismaPerimetre,
-  Habilitation as PrismaHabilitation,
+  Utilisateur as PrismaUtilisateur,
   Structure as PrismaStructure,
 } from "@prisma/client";
 
@@ -53,15 +53,15 @@ export class PerimetreServiceBase {
     return this.prisma.perimetre.delete(args);
   }
 
-  async findHabilitations(
+  async findUtilisateurs(
     parentId: string,
-    args: Prisma.HabilitationFindManyArgs
-  ): Promise<PrismaHabilitation[]> {
+    args: Prisma.UtilisateurFindManyArgs
+  ): Promise<PrismaUtilisateur[]> {
     return this.prisma.perimetre
       .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .habilitations(args);
+      .utilisateurs(args);
   }
 
   async getStructure(parentId: string): Promise<PrismaStructure | null> {

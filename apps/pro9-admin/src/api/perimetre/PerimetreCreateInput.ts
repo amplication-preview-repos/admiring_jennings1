@@ -1,7 +1,7 @@
-import { HabilitationCreateNestedManyWithoutPerimetresInput } from "./HabilitationCreateNestedManyWithoutPerimetresInput";
 import { StructureWhereUniqueInput } from "../structure/StructureWhereUniqueInput";
+import { UtilisateurCreateNestedManyWithoutPerimetresInput } from "./UtilisateurCreateNestedManyWithoutPerimetresInput";
 
 export type PerimetreCreateInput = {
-  habilitations?: HabilitationCreateNestedManyWithoutPerimetresInput;
   structure: StructureWhereUniqueInput;
+  utilisateurs?: UtilisateurCreateNestedManyWithoutPerimetresInput;
 };

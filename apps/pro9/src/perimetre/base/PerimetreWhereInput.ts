@@ -11,26 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { HabilitationListRelationFilter } from "../../habilitation/base/HabilitationListRelationFilter";
-import { ValidateNested, IsOptional } from "class-validator";
-import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
+import { Type } from "class-transformer";
+import { IsOptional, ValidateNested } from "class-validator";
 import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
+import { UtilisateurListRelationFilter } from "../../utilisateur/base/UtilisateurListRelationFilter";
 
 @InputType()
 class PerimetreWhereInput {
-  @ApiProperty({
-    required: false,
-    type: () => HabilitationListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => HabilitationListRelationFilter)
-  @IsOptional()
-  @Field(() => HabilitationListRelationFilter, {
-    nullable: true,
-  })
-  habilitations?: HabilitationListRelationFilter;
-
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -53,6 +41,18 @@ class PerimetreWhereInput {
     nullable: true,
   })
   structure?: StructureWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => UtilisateurListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => UtilisateurListRelationFilter)
+  @IsOptional()
+  @Field(() => UtilisateurListRelationFilter, {
+    nullable: true,
+  })
+  utilisateurs?: UtilisateurListRelationFilter;
 }
 
 export { PerimetreWhereInput as PerimetreWhereInput };

@@ -26,7 +26,7 @@ import { UtilisateurFindUniqueArgs } from "./UtilisateurFindUniqueArgs";
 import { CreateUtilisateurArgs } from "./CreateUtilisateurArgs";
 import { UpdateUtilisateurArgs } from "./UpdateUtilisateurArgs";
 import { DeleteUtilisateurArgs } from "./DeleteUtilisateurArgs";
-import { Habilitation } from "../../habilitation/base/Habilitation";
+import { Perimetre } from "../../perimetre/base/Perimetre";
 import { UtilisateurService } from "../utilisateur.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Utilisateur)
@@ -96,11 +96,9 @@ export class UtilisateurResolverBase {
       data: {
         ...args.data,
 
-        habilitation: args.data.habilitation
-          ? {
-              connect: args.data.habilitation,
-            }
-          : undefined,
+        perimetre: {
+          connect: args.data.perimetre,
+        },
       },
     });
   }
@@ -121,11 +119,9 @@ export class UtilisateurResolverBase {
         data: {
           ...args.data,
 
-          habilitation: args.data.habilitation
-            ? {
-                connect: args.data.habilitation,
-              }
-            : undefined,
+          perimetre: {
+            connect: args.data.perimetre,
+          },
         },
       });
     } catch (error) {
@@ -160,19 +156,19 @@ export class UtilisateurResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Habilitation, {
+  @graphql.ResolveField(() => Perimetre, {
     nullable: true,
-    name: "habilitation",
+    name: "perimetre",
   })
   @nestAccessControl.UseRoles({
-    resource: "Habilitation",
+    resource: "Perimetre",
     action: "read",
     possession: "any",
   })
-  async getHabilitation(
+  async getPerimetre(
     @graphql.Parent() parent: Utilisateur
-  ): Promise<Habilitation | null> {
-    const result = await this.service.getHabilitation(parent.id);
+  ): Promise<Perimetre | null> {
+    const result = await this.service.getPerimetre(parent.id);
 
     if (!result) {
       return null;

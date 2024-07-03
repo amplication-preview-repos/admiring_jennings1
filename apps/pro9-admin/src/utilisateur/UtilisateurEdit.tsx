@@ -6,13 +6,13 @@ import {
   EditProps,
   TextInput,
   DateTimeInput,
+  PasswordInput,
   ReferenceInput,
   SelectInput,
-  PasswordInput,
   SelectArrayInput,
 } from "react-admin";
 
-import { HabilitationTitle } from "../habilitation/HabilitationTitle";
+import { PerimetreTitle } from "../perimetre/PerimetreTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UtilisateurEdit = (props: EditProps): React.ReactElement => {
@@ -23,16 +23,16 @@ export const UtilisateurEdit = (props: EditProps): React.ReactElement => {
         <DateTimeInput label="dateActivation" source="dateActivation" />
         <DateTimeInput label="dateDesactivation" source="dateDesactivation" />
         <TextInput label="email" source="email" type="email" />
-        <ReferenceInput
-          source="habilitation.id"
-          reference="Habilitation"
-          label="Habilitations"
-        >
-          <SelectInput optionText={HabilitationTitle} />
-        </ReferenceInput>
         <TextInput label="mssEmail" source="mssEmail" type="email" />
         <TextInput label="nom" source="nom" />
         <PasswordInput label="password" source="password" />
+        <ReferenceInput
+          source="perimetre.id"
+          reference="Perimetre"
+          label="perimetre"
+        >
+          <SelectInput optionText={PerimetreTitle} />
+        </ReferenceInput>
         <TextInput label="prenom" source="prenom" />
         <SelectArrayInput
           source="roles"

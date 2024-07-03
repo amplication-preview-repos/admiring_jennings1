@@ -11,25 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { HabilitationUpdateManyWithoutPerimetresInput } from "./HabilitationUpdateManyWithoutPerimetresInput";
+import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { StructureWhereUniqueInput } from "../../structure/base/StructureWhereUniqueInput";
+import { UtilisateurUpdateManyWithoutPerimetresInput } from "./UtilisateurUpdateManyWithoutPerimetresInput";
 
 @InputType()
 class PerimetreUpdateInput {
-  @ApiProperty({
-    required: false,
-    type: () => HabilitationUpdateManyWithoutPerimetresInput,
-  })
-  @ValidateNested()
-  @Type(() => HabilitationUpdateManyWithoutPerimetresInput)
-  @IsOptional()
-  @Field(() => HabilitationUpdateManyWithoutPerimetresInput, {
-    nullable: true,
-  })
-  habilitations?: HabilitationUpdateManyWithoutPerimetresInput;
-
   @ApiProperty({
     required: false,
     type: () => StructureWhereUniqueInput,
@@ -41,6 +29,18 @@ class PerimetreUpdateInput {
     nullable: true,
   })
   structure?: StructureWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => UtilisateurUpdateManyWithoutPerimetresInput,
+  })
+  @ValidateNested()
+  @Type(() => UtilisateurUpdateManyWithoutPerimetresInput)
+  @IsOptional()
+  @Field(() => UtilisateurUpdateManyWithoutPerimetresInput, {
+    nullable: true,
+  })
+  utilisateurs?: UtilisateurUpdateManyWithoutPerimetresInput;
 }
 
 export { PerimetreUpdateInput as PerimetreUpdateInput };

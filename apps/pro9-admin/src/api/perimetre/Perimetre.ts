@@ -1,10 +1,10 @@
-import { Habilitation } from "../habilitation/Habilitation";
 import { Structure } from "../structure/Structure";
+import { Utilisateur } from "../utilisateur/Utilisateur";
 
 export type Perimetre = {
   createdAt: Date;
-  habilitations?: Array<Habilitation>;
   id: string;
   structure?: Structure;
   updatedAt: Date;
+  utilisateurs?: Array<Utilisateur>;
 };

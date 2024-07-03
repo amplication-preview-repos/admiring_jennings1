@@ -721,36 +721,6 @@
   },
   {
     "role": "adminCentral",
-    "resource": "Habilitation",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
-    "role": "adminCentral",
-    "resource": "Habilitation",
-    "action": "create:any",
-    "attributes": "*"
-  },
-  {
-    "role": "adminCentral",
-    "resource": "Habilitation",
-    "action": "update:any",
-    "attributes": "*"
-  },
-  {
-    "role": "adminCentral",
-    "resource": "Habilitation",
-    "action": "delete:any",
-    "attributes": "*"
-  },
-  {
-    "role": "adminCentral",
-    "resource": "Habilitation",
-    "action": "read:any",
-    "attributes": "*"
-  },
-  {
-    "role": "adminCentral",
     "resource": "Perimetre",
     "action": "read:own",
     "attributes": "*"

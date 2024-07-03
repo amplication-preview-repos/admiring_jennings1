@@ -26,8 +26,8 @@ import { PerimetreFindUniqueArgs } from "./PerimetreFindUniqueArgs";
 import { CreatePerimetreArgs } from "./CreatePerimetreArgs";
 import { UpdatePerimetreArgs } from "./UpdatePerimetreArgs";
 import { DeletePerimetreArgs } from "./DeletePerimetreArgs";
-import { HabilitationFindManyArgs } from "../../habilitation/base/HabilitationFindManyArgs";
-import { Habilitation } from "../../habilitation/base/Habilitation";
+import { UtilisateurFindManyArgs } from "../../utilisateur/base/UtilisateurFindManyArgs";
+import { Utilisateur } from "../../utilisateur/base/Utilisateur";
 import { Structure } from "../../structure/base/Structure";
 import { PerimetreService } from "../perimetre.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -158,17 +158,17 @@ export class PerimetreResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Habilitation], { name: "habilitations" })
+  @graphql.ResolveField(() => [Utilisateur], { name: "utilisateurs" })
   @nestAccessControl.UseRoles({
-    resource: "Habilitation",
+    resource: "Utilisateur",
     action: "read",
     possession: "any",
   })
-  async findHabilitations(
+  async findUtilisateurs(
     @graphql.Parent() parent: Perimetre,
-    @graphql.Args() args: HabilitationFindManyArgs
-  ): Promise<Habilitation[]> {
-    const results = await this.service.findHabilitations(parent.id, args);
+    @graphql.Args() args: UtilisateurFindManyArgs
+  ): Promise<Utilisateur[]> {
+    const results = await this.service.findUtilisateurs(parent.id, args);
 
     if (!results) {
       return [];

@@ -6,11 +6,11 @@ export type UtilisateurOrderByInput = {
   dateActivation?: SortOrder;
   dateDesactivation?: SortOrder;
   email?: SortOrder;
-  habilitationId?: SortOrder;
   id?: SortOrder;
   mssEmail?: SortOrder;
   nom?: SortOrder;
   password?: SortOrder;
+  perimetreId?: SortOrder;
   prenom?: SortOrder;
   roles?: SortOrder;
   updatedAt?: SortOrder;

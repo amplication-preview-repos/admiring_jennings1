@@ -4,27 +4,19 @@ import {
   Create,
   SimpleForm,
   CreateProps,
-  ReferenceArrayInput,
-  SelectArrayInput,
   ReferenceInput,
   SelectInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from "react-admin";
 
-import { HabilitationTitle } from "../habilitation/HabilitationTitle";
 import { StructureTitle } from "../structure/StructureTitle";
+import { UtilisateurTitle } from "../utilisateur/UtilisateurTitle";
 
 export const PerimetreCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceArrayInput
-          source="habilitations"
-          reference="Habilitation"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={HabilitationTitle} />
-        </ReferenceArrayInput>
         <ReferenceInput
           source="structure.id"
           reference="Structure"
@@ -32,6 +24,14 @@ export const PerimetreCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectInput optionText={StructureTitle} />
         </ReferenceInput>
+        <ReferenceArrayInput
+          source="utilisateurs"
+          reference="Utilisateur"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={UtilisateurTitle} />
+        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );

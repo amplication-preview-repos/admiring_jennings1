@@ -52,11 +52,9 @@ export class UtilisateurControllerBase {
       data: {
         ...data,
 
-        habilitation: data.habilitation
-          ? {
-              connect: data.habilitation,
-            }
-          : undefined,
+        perimetre: {
+          connect: data.perimetre,
+        },
       },
       select: {
         civilite: true,
@@ -64,16 +62,16 @@ export class UtilisateurControllerBase {
         dateActivation: true,
         dateDesactivation: true,
         email: true,
+        id: true,
+        mssEmail: true,
+        nom: true,
 
-        habilitation: {
+        perimetre: {
           select: {
             id: true,
           },
         },
 
-        id: true,
-        mssEmail: true,
-        nom: true,
         prenom: true,
         roles: true,
         updatedAt: true,
@@ -104,16 +102,16 @@ export class UtilisateurControllerBase {
         dateActivation: true,
         dateDesactivation: true,
         email: true,
+        id: true,
+        mssEmail: true,
+        nom: true,
 
-        habilitation: {
+        perimetre: {
           select: {
             id: true,
           },
         },
 
-        id: true,
-        mssEmail: true,
-        nom: true,
         prenom: true,
         roles: true,
         updatedAt: true,
@@ -145,16 +143,16 @@ export class UtilisateurControllerBase {
         dateActivation: true,
         dateDesactivation: true,
         email: true,
+        id: true,
+        mssEmail: true,
+        nom: true,
 
-        habilitation: {
+        perimetre: {
           select: {
             id: true,
           },
         },
 
-        id: true,
-        mssEmail: true,
-        nom: true,
         prenom: true,
         roles: true,
         updatedAt: true,
@@ -191,11 +189,9 @@ export class UtilisateurControllerBase {
         data: {
           ...data,
 
-          habilitation: data.habilitation
-            ? {
-                connect: data.habilitation,
-              }
-            : undefined,
+          perimetre: {
+            connect: data.perimetre,
+          },
         },
         select: {
           civilite: true,
@@ -203,16 +199,16 @@ export class UtilisateurControllerBase {
           dateActivation: true,
           dateDesactivation: true,
           email: true,
+          id: true,
+          mssEmail: true,
+          nom: true,
 
-          habilitation: {
+          perimetre: {
             select: {
               id: true,
             },
           },
 
-          id: true,
-          mssEmail: true,
-          nom: true,
           prenom: true,
           roles: true,
           updatedAt: true,
@@ -252,16 +248,16 @@ export class UtilisateurControllerBase {
           dateActivation: true,
           dateDesactivation: true,
           email: true,
+          id: true,
+          mssEmail: true,
+          nom: true,
 
-          habilitation: {
+          perimetre: {
             select: {
               id: true,
             },
           },
 
-          id: true,
-          mssEmail: true,
-          nom: true,
           prenom: true,
           roles: true,
           updatedAt: true,

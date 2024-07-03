@@ -1,7 +1,7 @@
-import { HabilitationUpdateManyWithoutPerimetresInput } from "./HabilitationUpdateManyWithoutPerimetresInput";
 import { StructureWhereUniqueInput } from "../structure/StructureWhereUniqueInput";
+import { UtilisateurUpdateManyWithoutPerimetresInput } from "./UtilisateurUpdateManyWithoutPerimetresInput";
 
 export type PerimetreUpdateInput = {
-  habilitations?: HabilitationUpdateManyWithoutPerimetresInput;
   structure?: StructureWhereUniqueInput;
+  utilisateurs?: UtilisateurUpdateManyWithoutPerimetresInput;
 };
