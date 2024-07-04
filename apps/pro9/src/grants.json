@@ -1,0 +1,1358 @@
+[
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Identite",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Telecom",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Affectation",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Utilisateur",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Adresse",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "Structure",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Salarie",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Salarie",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Salarie",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "Salarie",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "Salarie",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "Salarie",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminCentral",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "adminFederal",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Etendu",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "limite",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "standard",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "Utilisateur",
+    "resource": "InformationPostale",
+    "action": "read:any",
+    "attributes": "*"
+  }
+]

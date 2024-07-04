@@ -1,0 +1,158 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Identite {
+  civilite               EnumIdentiteCivilite?
+  codeLieuNaissance      String
+  communeDeNaissance     String
+  createdAt              DateTime                @default(now())
+  dateNaissance          DateTime
+  departementDeNaissance String?
+  id                     String                  @id @default(cuid())
+  nationalite            EnumIdentiteNationalite
+  nomNaissance           String
+  nomUsuel               String
+  numeroInsee            String?
+  paysDeNaissance        String
+  premierPrenom          String
+  prenoms                String
+  prenomUsuel            String
+  salarie                Salarie?
+  sexe                   EnumIdentiteSexe?
+  updatedAt              DateTime                @updatedAt
+}
+
+model Telecom {
+  createdAt   DateTime  @default(now())
+  id          String    @id @default(cuid())
+  Salarie     Salarie[]
+  typeMoyen   String
+  updatedAt   DateTime  @updatedAt
+  valeurMoyen Json
+}
+
+model Affectation {
+  activite    EnumAffectationActivite
+  createdAt   DateTime                @default(now())
+  domaine     Structure               @relation(name: "affectationDomaine", fields: [domaineId], references: [id])
+  domaineId   String                  @unique
+  id          String                  @id @default(cuid())
+  salarie     Salarie?                @relation(fields: [salarieId], references: [id])
+  salarieId   String?
+  structure   Structure               @relation(name: "AffectationsOnStructure", fields: [structureId], references: [id])
+  structureId String
+  updatedAt   DateTime                @updatedAt
+}
+
+model Utilisateur {
+  civilite          String?
+  createdAt         DateTime    @default(now())
+  dateActivation    DateTime?
+  dateDesactivation DateTime?
+  email             String?
+  id                String      @id @default(cuid())
+  nom               String?
+  password          String?
+  prenom            String?
+  roles             Json
+  structures        Structure[]
+  updatedAt         DateTime    @updatedAt
+  username          String?
+}
+
+model Adresse {
+  createdAt            DateTime           @default(now())
+  debutValidite        DateTime
+  demanagementSalaries Salarie?           @relation(name: "demanagementSalaries")
+  DomiciliationSalarie Salarie?           @relation(name: "DomiciliationSalarie")
+  finValidite          DateTime?
+  id                   String             @id @default(cuid())
+  informationPostale   InformationPostale @relation(fields: [informationPostaleId], references: [id])
+  informationPostaleId String             @unique
+  localisationInitiale String?
+  localisationPrecise  String?
+  updatedAt            DateTime           @updatedAt
+}
+
+model Structure {
+  affectationDomaine Affectation?            @relation(name: "affectationDomaine")
+  affectations       Affectation[]           @relation(name: "AffectationsOnStructure")
+  code               String
+  createdAt          DateTime                @default(now())
+  id                 String                  @id @default(cuid())
+  typeField          EnumStructureTypeField?
+  updatedAt          DateTime                @updatedAt
+  utilisateur        Utilisateur?            @relation(fields: [utilisateurId], references: [id])
+  utilisateurId      String?
+}
+
+model Salarie {
+  affectations    Affectation[]
+  createdAt       DateTime      @default(now())
+  demenegament    Adresse       @relation(name: "demanagementSalaries", fields: [demenagementId], references: [id])
+  demenagementId  String        @unique
+  domiciliation   Adresse       @relation(name: "DomiciliationSalarie", fields: [domiciliationId], references: [id])
+  domiciliationId String        @unique
+  id              String        @id @default(cuid())
+  identite        Identite      @relation(fields: [identiteId], references: [id])
+  identiteId      String        @unique
+  statutAdmr      Boolean
+  statutVip       Boolean
+  telecom         Telecom?      @relation(fields: [telecomId], references: [id])
+  telecomId       String?
+  updatedAt       DateTime      @updatedAt
+}
+
+model InformationPostale {
+  adresse                    Adresse?
+  ancienCogCommune           String?
+  cogCommune                 String?
+  cogPays                    String?
+  complementAdresseExterieur String?
+  complementAdresseInterieur String?
+  complementVoie             String?
+  cpCommune                  String
+  createdAt                  DateTime @default(now())
+  id                         String   @id @default(cuid())
+  libelleCommune             String?
+  libellePays                String?
+  libelleVoie                String
+  matriculeVoie              String?
+  mentionPostal              String?
+  numeroVoie                 Int?
+  typeAbregeVoie             String?
+  updatedAt                  DateTime @updatedAt
+}
+
+enum EnumIdentiteCivilite {
+  Homme
+  Femme
+}
+
+enum EnumIdentiteNationalite {
+  France
+  Autre
+}
+
+enum EnumIdentiteSexe {
+  Feminin
+  Masculin
+}
+
+enum EnumAffectationActivite {
+  Domicile
+  Soin
+  Repas
+}
+
+enum EnumStructureTypeField {
+  Agence
+  Association
+  Federation
+}
